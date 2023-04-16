@@ -1,0 +1,37 @@
+@use 'mixinsFunctions' as mixins;
+
+.glass {
+    background       : linear-gradient(135deg, rgba(255, 255, 255, 0.505), rgba(255, 255, 255, 0.07));
+    border           : 1px solid rgba(255, 255, 255, 0.25);
+    border-left-color: rgba(255, 255, 255, 0.75);
+    border-top-color : rgba(255, 255, 255, 0.75);
+    backdrop-filter  : blur(1rem);
+}
+
+.flex__row {
+    @include mixins.flex();
+}
+.flex__row--no-wrap {
+    @include mixins.flex($wrap: no-wrap);
+}
+
+.flex__row--justify-space-between {
+    @include mixins.flex($justify: space-between);
+}
+
+.flex__row--justify-space-between--align-stretch {
+    @include mixins.flex($align: strech, $justify: space-between);
+}
+
+.flex__column {
+    @include mixins.flex($direction: column);
+}
+
+.flex__column--justify-space-between {
+    @include mixins.flex($justify: space-between, $direction: column);
+}
+
+.flex__column--justify-space-around {
+    @include mixins.flex($direction: column, $justify: space-around);
+}
+

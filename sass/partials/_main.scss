@@ -1,0 +1,7 @@
+@use 'extendClass';
+
+.main {
+    width: 100%;
+    @extend .flex__row--justify-space-between--align-stretch;
+    gap: 1rem;
+}

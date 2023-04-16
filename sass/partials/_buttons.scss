@@ -1,0 +1,52 @@
+@use 'extendClass';
+
+.buttons-container {
+    @extend .flex__row--no-wrap;
+    gap   : 3rem;
+    height: auto;
+    width : 90%;
+    
+    &--tools {
+        width : auto;
+        height: 100%;
+        @extend .flex__column--justify-space-around;
+        gap: 2rem;
+    }
+}
+
+.button {
+    @extend .glass;
+
+    &__icon {
+        font-size: 1.5rem;
+    }
+
+    &__text {
+        font-size: 0.8rem;
+    }
+
+    &__tools {
+        position     : relative;
+        width        : 3rem;
+        height       : 3rem;
+        border-radius: 50%;
+
+        .button__text {
+            position: absolute;
+            top     : 0;
+            left    : 0;
+            display : none;
+        }
+    }
+
+    &__normal {
+        @extend .flex__row;
+        gap          : 1rem;
+        padding      : 0.5rem 1rem;
+        width        : 100%;
+        border-radius: 2rem;
+    }
+
+    cursor: pointer;
+    color : white;
+}

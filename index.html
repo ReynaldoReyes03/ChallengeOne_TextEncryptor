@@ -5,189 +5,194 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Text Encryptor | Reynaldo Martínez Reyes</title>
+            <link rel="stylesheet" href="css/revert.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
             <link rel="stylesheet" href="css/styles.css">
         </head>
         <body>
-            <header class="header">
-                <div class="header__logo-container">
-                    <img src="" alt="Alura Logo" class="header__logo">
-                </div>
-                <h1 class="header__title">Text Encryptor</h1>
-                <button class="button button__tools button--help">
-                    <span class="button__icon">
-                        <i class="fa-solid fa-question"></i>
-                    </span>
-                    <span class="button__text">Help</span>
-                </button>
-            </header>
-
-            <main class="main">
-                <div id="modal">
-                    <div class="modal__icon-box">
-                        <span class="modal__icon modal__icon--correct">
-                            <i class="fa-regular fa-circle-check"></i>
-                        </span>
-                        <span class="modal__icon modal__icon--error">
-                            <i class="fa-regular fa-circle-xmark"></i>
-                        </span>
+            <div class="page-container">
+                <header class="header">
+                    <div class="header__logo-container">
+                        <img src="" alt="Alura Logo" class="header__logo">
                     </div>
-                    <h2 class="modal__title">Title</h2>
-                    <p class="modal__description">Description of the advice</p>
-                    <button class="modal__button">Close</button>
-                </div>
-                <div class="container container__textarea">
-                    <div class="buttons-container buttons-container--tools">
-                        <button class="button button__tools button--paste">
-                            <span class="button__icon">
-                                <i class="fa-regular fa-paste"></i>
+                    <h1 class="header__title">Text Encryptor</h1>
+                    <button class="button button__tools button--help">
+                        <span class="button__icon">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <span class="button__text">Help</span>
+                    </button>
+                </header>
+                
+                <main class="main">
+                    <div class="modal">
+                        <div class="modal__icon-box">
+                            <span class="modal__icon modal__icon--correct">
+                                <i class="fa-regular fa-circle-check"></i>
                             </span>
-                            <span class="button__text">Paste</span>
-                        </button>
-                        <button class="button button__tools button--clear">
-                            <span class="button__icon">
-                                <i class="fa-solid fa-xmark"></i>
+                            <span class="modal__icon modal__icon--error">
+                                <i class="fa-regular fa-circle-xmark"></i>
                             </span>
-                            <span class="button__text">Clear</span>
-                        </button>
-                        <button class="button button__tools button--swap">
-                            <span class="button__icon">
-                                <i class="fa-solid fa-right-left"></i>
-                            </span>
-                            <span class="button__text">Swap</span>
-                        </button>
-                        <button class="button button__tools button--reset">
-                            <span class="button__icon">
-                                <i class="fa-solid fa-rotate-right"></i>
-                            </span>
-                            <span class="button__text">Reset</span>
-                        </button>
+                        </div>
+                        <h2 class="modal__title">Title</h2>
+                        <p class="modal__description">Description of the advice</p>
+                        <button class="modal__button">Close</button>
                     </div>
-                    <form class="container__box" accept="#">
-                        <div class="container__textarea-box">
-                            <label for="textarea-box__input" class="textarea-box__label">Enter your text...</label>
-                            <textarea name="" id="textarea-box__input" cols="30" rows="10" class="textarea"></textarea>
-                            <div class="advice">
-                                <span class="advice__icon">
-                                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <div class="container container__textarea">
+                        <form class="container__box" accept="#">
+                            <div class="container__textarea-box">
+                                <label for="textarea-box__input" class="textarea-box__label">Enter your text...</label>
+                                <textarea name="" id="textarea-box__input" class="textarea"></textarea>
+                                <div class="advice">
+                                    <span class="advice__icon">
+                                        <i class="fa-solid fa-circle-exclamation"></i>
+                                    </span>
+                                    <span class="advice__text">Some is wrong.</span>
+                                </div>
+                            </div>
+                            <div class="buttons-container">
+                                <button class="button button__normal button--encrypt">
+                                    <span class="button__icon">
+                                        <i class="fa-solid fa-lock"></i>
+                                    </span>
+                                    <span class="button__text">Encrypt</span>
+                                </button>
+                                <button class="button button__normal button--decrypt">
+                                    <span class="button__icon">
+                                        <i class="fa-solid fa-lock-open"></i>
+                                    </span>
+                                    <span class="button__text">Decrypt</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="container container__buttons">
+                        <div class="buttons-container buttons-container--tools">
+                            <button class="button button__tools button--paste">
+                                <span class="button__icon">
+                                    <i class="fa-regular fa-paste"></i>
                                 </span>
-                                <span class="advice__text">Some is wrong.</span>
+                                <span class="button__text">Paste</span>
+                            </button>
+                            <button class="button button__tools button--clear">
+                                <span class="button__icon">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </span>
+                                <span class="button__text">Clear</span>
+                            </button>
+                            <button class="button button__tools button--swap">
+                                <span class="button__icon">
+                                    <i class="fa-solid fa-right-left"></i>
+                                </span>
+                                <span class="button__text">Swap</span>
+                            </button>
+                            <button class="button button__tools button--reset">
+                                <span class="button__icon">
+                                    <i class="fa-solid fa-rotate-right"></i>
+                                </span>
+                                <span class="button__text">Reset</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="container container__info">
+                        <div class="container__image-box">
+                            <img src="" alt="Person image" class="container__image">
+                        </div>
+                        <h2 class="container__title">Your Title here</h2>
+                        <p class="container__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi temporibus fugiat at odit laboriosam eos praesentium consectetur necessitatibus libero rerum, obcaecati, ea reprehenderit laudantium earum, neque vero debitis similique hic!</p>
+                    </div>
+                    <div class="container container__encrypt-text">
+                        <div class="container__box">
+                            <div class="container__textarea-box">
+                                <label for="textarea-box__text" class="textarea-box__label">Your text...</label>
+                                <textarea name="" id="textarea-box__text" class="textarea"></textarea>
+                            </div>
+                            <div class="buttons-container">
+                                <button class="button button__normal button--copy">
+                                    <span class="button__icon">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </span>
+                                    <span class="button__text">Copy</span>
+                                </button>
                             </div>
                         </div>
-                        <div class="buttons-container">
-                            <button class="button button__normal button--encrypt">
-                                <span class="button__icon">
-                                    <i class="fa-solid fa-lock"></i>
-                                </span>
-                                <span class="button__text">Encrypt</span>
-                            </button>
-                            <button class="button button__normal button--decrypt">
-                                <span class="button__icon">
-                                    <i class="fa-solid fa-lock-open"></i>
-                                </span>
-                                <span class="button__text">Decrypt</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div class="container container__info">
-                    <div class="container__image-box">
-                        <img src="" alt="Person image" class="container__image">
                     </div>
-                    <h2 class="container__title">Your Title here</h2>
-                    <p class="container__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi temporibus fugiat at odit laboriosam eos praesentium consectetur necessitatibus libero rerum, obcaecati, ea reprehenderit laudantium earum, neque vero debitis similique hic!</p>
-                </div>
-                <div class="container container__encrypt-text">
-                    <div class="container__box">
-                        <div class="container__textarea-box">
-                            <label for="textarea-box__text" class="textarea-box__label">Your text...</label>
-                            <textarea name="" id="textarea-box__text" cols="30" rows="10" class="textarea"></textarea>
-                        </div>
-                        <div class="buttons-container">
-                            <button class="button button__normal button--copy">
-                                <span class="button__icon">
-                                    <i class="fa-regular fa-copy"></i>
-                                </span>
-                                <span class="button__text">Copy</span>
-                            </button>
-                        </div>
+                </main>
+                
+                <footer class="footer">
+                    <div class="footer__social-media container">
+                        <ul class="social-media__list">
+                            <li class="social-media__item" style="--color: #0A66C2;">
+                                <a href="#" class="social-media__link">
+                                    <span class="social-media__icon">
+                                        <i class="fa-brands fa-linkedin"></i>
+                                    </span>
+                                    <span class="social-media__text">LinkedIn</span>
+                                </a>
+                            </li>
+                            <li class="social-media__item" style="--color: #000000;">
+                                <a href="#" class="social-media__link">
+                                    <span class="social-media__icon">
+                                        <i class="fa-brands fa-github"></i>
+                                    </span>
+                                    <span class="social-media__text">GitHub</span>
+                                </a>
+                            </li>
+                            <li class="social-media__item" style="--color: #19B1F4;">
+                                <a href="#" class="social-media__link">
+                                    <span class="social-media__icon">
+                                        <i class="fa-solid fa-globe"></i>
+                                    </span>
+                                    <span class="social-media__text">WebSite</span>
+                                </a>
+                            </li>
+                            <li class="social-media__item" style="--color: #5865F2;">
+                                <a href="#" class="social-media__link">
+                                    <span class="social-media__icon">
+                                        <i class="fa-brands fa-discord"></i>
+                                    </span>
+                                    <span class="social-media__text">Discord</span>
+                                </a>
+                            </li>
+                            <li class="social-media__item" style="--color: #E1306C;">
+                                <a href="#" class="social-media__link">
+                                    <span class="social-media__icon">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </span>
+                                    <span class="social-media__text">Intagram</span>
+                                </a>
+                            </li>
+                            <li class="social-media__item" style="--color: #4267B2;">
+                                <a href="#" class="social-media__link">
+                                    <span class="social-media__icon">
+                                        <i class="fa-brands fa-facebook-f"></i>
+                                    </span>
+                                    <span class="social-media__text">Facebook</span>
+                                </a>
+                            </li>
+                            <li class="social-media__item" style="--color: #FF0000;">
+                                <a href="#" class="social-media__link">
+                                    <span class="social-media__icon">
+                                        <i class="fa-brands fa-youtube"></i>
+                                    </span>
+                                    <span class="social-media__text">YouTube</span>
+                                </a>
+                            </li>
+                            <li class="social-media__item" style="--color: #1DA1F2;">
+                                <a href="#" class="social-media__link">
+                                    <span class="social-media__icon">
+                                        <i class="fa-brands fa-twitter"></i>
+                                    </span>
+                                    <span class="social-media__text">Twitter</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            </main>
-            
-            <footer class="footer">
-                <div class="footer__copyright">
-                    <p>&copy Copyright 2023 Reynaldo Martínez Reyes - All rights reserved </p>
-                </div>
-                <div class="footer__social-media">
-                    <ul class="social-media__list">
-                        <li class="social-media__item" style="--color: #0A66C2;">
-                            <a href="#" class="social-media__link">
-                                <span class="social-media__icon">
-                                    <i class="fa-brands fa-linkedin"></i>
-                                </span>
-                                <span class="social-media__text">LinkedIn</span>
-                            </a>
-                        </li>
-                        <li class="social-media__item" style="--color: #000000;">
-                            <a href="#" class="social-media__link">
-                                <span class="social-media__icon">
-                                    <i class="fa-brands fa-github"></i>
-                                </span>
-                                <span class="social-media__text">GitHub</span>
-                            </a>
-                        </li>
-                        <li class="social-media__item" style="--color: #19B1F4;">
-                            <a href="#" class="social-media__link">
-                                <span class="social-media__icon">
-                                    <i class="fa-solid fa-globe"></i>
-                                </span>
-                                <span class="social-media__text">WebSite</span>
-                            </a>
-                        </li>
-                        <li class="social-media__item" style="--color: #5865F2;">
-                            <a href="#" class="social-media__link">
-                                <span class="social-media__icon">
-                                    <i class="fa-brands fa-discord"></i>
-                                </span>
-                                <span class="social-media__text">Discord</span>
-                            </a>
-                        </li>
-                        <li class="social-media__item" style="--color: #E1306C;">
-                            <a href="#" class="social-media__link">
-                                <span class="social-media__icon">
-                                    <i class="fa-brands fa-instagram"></i>
-                                </span>
-                                <span class="social-media__text">Intagram</span>
-                            </a>
-                        </li>
-                        <li class="social-media__item" style="--color: #4267B2;">
-                            <a href="#" class="social-media__link">
-                                <span class="social-media__icon">
-                                    <i class="fa-brands fa-facebook-f"></i>
-                                </span>
-                                <span class="social-media__text">Facebook</span>
-                            </a>
-                        </li>
-                        <li class="social-media__item" style="--color: #FF0000;">
-                            <a href="#" class="social-media__link">
-                                <span class="social-media__icon">
-                                    <i class="fa-brands fa-youtube"></i>
-                                </span>
-                                <span class="social-media__text">YouTube</span>
-                            </a>
-                        </li>
-                        <li class="social-media__item" style="--color: #1DA1F2;">
-                            <a href="#" class="social-media__link">
-                                <span class="social-media__icon">
-                                    <i class="fa-brands fa-twitter"></i>
-                                </span>
-                                <span class="social-media__text">Twitter</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </footer>
+                    <div class="footer__copyright container">
+                        <p>&copy Copyright 2023 Reynaldo Martínez Reyes - All rights reserved </p>
+                    </div>
+                </footer>
+            </div>
 
             <script src="dist/main.js" type="module" defer></script>
         </body>

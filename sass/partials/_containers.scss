@@ -1,0 +1,70 @@
+@use 'extendClass';
+
+.container {
+    width        : 50%;
+    height       : auto;
+    padding      : 2rem 0;
+    border-radius: 1rem;
+    color        : white;
+    @extend .glass;
+    @extend .flex__row;
+
+    &__textarea {
+        @extend .flex__row;
+        gap     : 2rem;
+        position: relative;
+    
+        &-box {
+            width     : 90%;
+            min-height: 250px;
+            position  : relative;
+            @extend .flex__column;
+        }
+    }
+
+    &__buttons {
+        width : 6rem;
+        height: auto;
+    }
+    
+    &__box {
+        @extend .flex__column;
+        gap  : 3.5rem;
+        width: 90%;
+    }
+
+    &__info {
+        @extend .flex__column;
+        width  : 30%;
+        gap    : 2rem;
+        padding: 2rem;
+        height : auto;
+    }
+    
+    &__encrypt-text {
+        display: none;
+        width  : 30%;
+    }
+}
+
+.textarea-box {
+    &__label {
+        position: absolute;
+        top     : 0;
+        left    : 0;
+    }
+}
+
+.textarea {
+    min-height: 250px;
+    width     : 100%;
+}
+
+.advice {
+    position : absolute;
+    bottom   : 0;
+    left     : 50%;
+    transform: translate(-50%, 140%);
+    width    : 100%;
+    @extend .flex__row--no-wrap;
+}

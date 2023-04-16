@@ -9,18 +9,78 @@
   box-sizing: border-box;
 }
 
-body {
-  padding: 1rem 2rem;
-  min-height: 100vh;
+.glass, .social-media__item, .footer__social-media, .container, .button, .header {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.505), rgba(255, 255, 255, 0.07));
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-left-color: rgba(255, 255, 255, 0.75);
+  border-top-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(1rem);
+}
+
+.flex__row, .social-media__list, .social-media__item, .container, .container__textarea, .button__normal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.flex__row--no-wrap, .advice, .buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+}
+
+.flex__row--justify-space-between, .header, .page-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.flex__row--justify-space-between--align-stretch, .main {
+  display: flex;
+  align-items: strech;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.flex__column, .social-media__link, .footer, .container__textarea-box, .container__box, .container__info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.flex__column--justify-space-between {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  gap: 2rem;
-  background: #000;
+  flex-wrap: wrap;
 }
-body::after {
-  content: "";
+
+.flex__column--justify-space-around, .buttons-container--tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.page-container {
+  padding: 2rem;
+  min-height: 100vh;
+  height: auto;
+  gap: 2rem;
+  background: url("https://img3.goodfon.ru/wallpaper/nbig/0/2b/svet-cvet-krug-uzor.jpg");
+}
+.page-container::after {
   position: absolute;
   top: 3rem;
   left: 50%;
@@ -30,8 +90,7 @@ body::after {
   z-index: -1;
   border-radius: 2rem;
 }
-body::before {
-  content: "";
+.page-container::before {
   position: absolute;
   bottom: 3rem;
   left: 50%;
@@ -43,12 +102,7 @@ body::before {
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
   width: 100%;
-  background-color: red;
   padding: 0.5rem 2rem;
   border-radius: 1rem;
 }
@@ -59,92 +113,88 @@ body::before {
   letter-spacing: 0.8rem;
 }
 
-#modal {
-  display: none;
-}
-
-.main {
-  width: 100%;
-  height: min(450px, 70vh);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 4rem;
-}
-
 .buttons-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
+  gap: 3rem;
+  height: auto;
+  width: 90%;
 }
 .buttons-container--tools {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  width: auto;
+  height: 100%;
+  gap: 2rem;
 }
 
+.button {
+  cursor: pointer;
+  color: white;
+}
 .button__icon {
   font-size: 1.5rem;
 }
 .button__text {
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 .button__tools {
   position: relative;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
 }
 .button__tools .button__text {
   position: absolute;
   top: 0;
   left: 0;
+  display: none;
+}
+.button__normal {
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  border-radius: 2rem;
+}
+
+.modal {
+  display: none;
+}
+
+.main {
+  width: 100%;
+  gap: 1rem;
 }
 
 .container {
-  width: 60%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.171);
-  border-radius: 3rem;
-  border: 1px solid black;
-  border-right-width: 2px;
-  border-bottom-width: 2px;
-  backdrop-filter: blur(1rem);
-  color: #f00;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  width: 50%;
+  height: auto;
+  padding: 2rem 0;
+  border-radius: 1rem;
+  color: white;
 }
 .container__textarea {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
   gap: 2rem;
   position: relative;
 }
 .container__textarea-box {
   width: 90%;
+  min-height: 250px;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+}
+.container__buttons {
+  width: 6rem;
+  height: auto;
 }
 .container__box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 2rem;
-  width: 60%;
+  gap: 3.5rem;
+  width: 90%;
 }
 .container__info {
-  display: none;
+  width: 30%;
+  gap: 2rem;
+  padding: 2rem;
+  height: auto;
 }
 .container__encrypt-text {
-  width: 40%;
+  display: none;
+  width: 30%;
 }
 
 .textarea-box__label {
@@ -153,42 +203,56 @@ body::before {
   left: 0;
 }
 
+.textarea {
+  min-height: 250px;
+  width: 100%;
+}
+
 .advice {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translate(-50%, 100%);
+  transform: translate(-50%, 140%);
   width: 100%;
 }
 
-.textarea {
-  height: max(350px, 100%);
+.footer {
+  width: 100%;
+  gap: 1rem;
+  text-align: center;
+}
+.footer__copyright {
+  width: 100%;
+  padding: 1rem;
+}
+.footer__social-media {
+  padding: 1.5rem;
   width: 100%;
 }
 
 .social-media__list {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 2rem;
+  gap: 3rem;
   list-style: none;
 }
-.social-media__link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-decoration: none;
+.social-media__item {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
 }
-
-.footer {
-  color: #F00;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 2rem;
+.social-media__link {
+  color: var(--color);
+  text-decoration: none;
+  position: relative;
+}
+.social-media__icon {
+  font-size: 1.5em;
+}
+.social-media__text {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  display: none;
 }
 
 /*# sourceMappingURL=styles.css.map */

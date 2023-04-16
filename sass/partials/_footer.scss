@@ -1,0 +1,19 @@
+@use 'extendClass';
+
+.footer {
+    @extend .flex__column;
+    width     : 100%;
+    gap       : 1rem;
+    text-align: center;
+
+    &__copyright {
+        width  : 100%;
+        padding: 1rem;
+    }
+
+    &__social-media {
+        @extend .glass;
+        padding: 1.5rem;
+        width  : 100%;
+    }
+}

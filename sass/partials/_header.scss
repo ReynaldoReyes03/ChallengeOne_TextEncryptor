@@ -1,0 +1,16 @@
+@use 'extendClass';
+
+.header {
+    @extend .flex__row--justify-space-between;
+    width        : 100%;
+    padding      : 0.5rem 2rem;
+    border-radius: 1rem;
+    @extend .glass;
+
+    &__title {
+        color         : white;
+        font-size     : 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.8rem;
+    }
+}

@@ -1,10 +1,11 @@
 @use 'extendClass';
 
 .page-container {
+    max-width: 100vw;
     padding   : 2rem;
     min-height: 100vh;
     height    : auto;
-    @extend .flex__row--justify-space-between;
+    @extend .flex__column--justify-space-between;
     gap       : 2rem;
     background: url('https://img3.goodfon.ru/wallpaper/nbig/0/2b/svet-cvet-krug-uzor.jpg');
 

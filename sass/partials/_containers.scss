@@ -39,10 +39,10 @@
         gap    : 2rem;
         padding: 2rem;
         height : auto;
+        display: none;
     }
     
     &__encrypt-text {
-        display: none;
         width  : 30%;
     }
 }

@@ -28,6 +28,12 @@
         max-width: 400px;
         min-height: 250px;
         color: white;
+        
+        @media (max-width: 767px) {
+            & {
+                width: 70%;
+            }
+        }
     }
 
     &__icon-box {

@@ -112,6 +112,20 @@
   font-size: 2rem;
   text-transform: uppercase;
   letter-spacing: 0.8rem;
+  text-align: center;
+}
+@media (max-width: 1023px) {
+  .header__title {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 767px) {
+  .header__title {
+    font-size: 1.25rem;
+    letter-spacing: 0.5rem;
+    order: -1;
+    width: 100%;
+  }
 }
 
 .buttons-container {
@@ -123,6 +137,21 @@
   width: auto;
   height: 100%;
   gap: 2rem;
+}
+@media (max-width: 1023px) {
+  .buttons-container--tools {
+    padding: 0 2rem;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 2rem;
+  }
+}
+@media (max-width: 767px) {
+  .buttons-container--box {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 .button {
@@ -178,6 +207,11 @@
   min-height: 250px;
   color: white;
 }
+@media (max-width: 767px) {
+  .modal__box {
+    width: 70%;
+  }
+}
 .modal__icon-box {
   width: 100px;
   height: 100px;
@@ -230,6 +264,11 @@
   width: 100%;
   gap: 1rem;
 }
+@media (max-width: 1023px) {
+  .main {
+    flex-direction: column;
+  }
+}
 
 .container {
   width: 50%;
@@ -265,6 +304,11 @@
 .container__encrypt-text {
   width: 30%;
 }
+@media (max-width: 1023px) {
+  .container {
+    width: 100%;
+  }
+}
 
 .textarea-box__label {
   position: absolute;
@@ -294,6 +338,8 @@
 .footer__copyright {
   width: 100%;
   padding: 1rem;
+  letter-spacing: 0.1rem;
+  line-height: 1.5rem;
 }
 .footer__social-media {
   padding: 1.5rem;

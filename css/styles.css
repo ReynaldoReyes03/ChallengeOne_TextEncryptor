@@ -71,7 +71,7 @@
   transition-delay: 0.2s;
 }
 
-.flex__row, .social-media__list, .container, .container__textarea, .modal, .button__normal, .button-parent, .social-media__item, .button__tools {
+.flex__row, .social-media__list, .container, .container__textarea, .modal, .modal__icon.active, .button__normal, .button-parent, .social-media__item, .button__tools {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,7 +111,7 @@
   flex-wrap: wrap;
 }
 
-.flex__column, .social-media__link, .footer, .container__textarea-box, .container__box, .container__info, .modal__icon-box {
+.flex__column, .social-media__link, .footer, .container__textarea-box, .container__box, .container__info {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -263,11 +263,11 @@
 }
 .modal__box {
   border-radius: 1.5rem;
-  gap: 2rem;
+  gap: 1.25rem;
   padding: 2rem;
   min-width: 200px;
   max-width: 400px;
-  min-height: 250px;
+  min-height: 200px;
   color: white;
 }
 @media (max-width: 767px) {
@@ -278,9 +278,11 @@
 .modal__icon-box {
   width: 7rem;
   height: 7rem;
-  background: #000;
 }
 .modal__icon {
+  display: none;
+  width: 100%;
+  height: 100%;
   font-size: 6rem;
 }
 .modal__title {

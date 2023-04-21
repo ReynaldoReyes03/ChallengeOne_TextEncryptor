@@ -22,11 +22,11 @@
         @extend .glass;
         border-radius: 1.5rem;
         @extend .flex__column--justify-space-around;
-        gap: 2rem;
+        gap: 1.25rem;
         padding: 2rem;
         min-width: 200px;
         max-width: 400px;
-        min-height: 250px;
+        min-height: 200px;
         color: white;
         
         @media (max-width: 767px) {
@@ -39,12 +39,17 @@
     &__icon-box {
         width : 7rem;
         height: 7rem;
-        background: #000;
-        @extend .flex__column;
     }
-
+    
     &__icon {
+        display: none;
+        width : 100%;
+        height: 100%;
         font-size: 6rem;
+
+        &.active {
+            @extend .flex__row;
+        }
     }
 
     &__title {

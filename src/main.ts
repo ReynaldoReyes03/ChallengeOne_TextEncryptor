@@ -71,8 +71,8 @@ const MODAL_ICONS: Icon = {
 
 // #region REGULAR EXPRESSIONS
 // const pattern: RegExp = /[À-ðò-ÿA-Z]/;
-const pattern: RegExp = /^[a-z\s]+$/;
-const flags: string   = 'mg';
+const pattern: RegExp = /^[a-zñ\s]+$/;
+const flags: string   = 'g';
 const regExp: RegExp  = new RegExp(pattern, flags);
 // #endregion
 
@@ -89,13 +89,13 @@ let animationTimeout: number  = 0;
 
 // #region FUNCTIONS
 const encrypt = (text: string): string => {
-    Object.entries(KEYS_ENCRYPT).forEach(keyEncrypt => text = text.replace(new RegExp(keyEncrypt[0], 'img'), keyEncrypt[1]));
+    Object.entries(KEYS_ENCRYPT).forEach(keyEncrypt => text = text.replace(new RegExp(keyEncrypt[0], 'mg'), keyEncrypt[1]));
 
     return text;
 };
 
 const decrypt = (text: string): string => {
-    Object.entries(KEYS_ENCRYPT).reverse().forEach(keyEncrypt  => text = text.replace(new RegExp(keyEncrypt[1], 'img'), keyEncrypt[0]));
+    Object.entries(KEYS_ENCRYPT).reverse().forEach(keyEncrypt  => text = text.replace(new RegExp(keyEncrypt[1], 'mg'), keyEncrypt[0]));
     
     return text;
 };
@@ -146,11 +146,7 @@ const changeVisibleContainer = ($elementToShow: HTMLElement, $elementToHide: HTM
 
 const openModalWindow = (type: ModalType, title: string, description: string, timeout: number = modalLife): void => {
     Object.entries(MODAL_ICONS).forEach((icon: [string, HTMLSpanElement]) => {
-        if (icon[0] === type.toString()) {
-            icon[1].style.setProperty('display', 'block');
-        } else {
-            icon[1].style.setProperty('display', 'none');
-        }
+        if (icon[0] === type.toString()) icon[1].classList.add('active');
     });
 
     $modalTitle.textContent       = title;
@@ -165,6 +161,13 @@ const openModalWindow = (type: ModalType, title: string, description: string, ti
 const closeModalWindow = (): void => {
     $modal.classList.remove('open');
     $modal.classList.add('close');
+
+    setTimeout(() => {
+        Object.values(MODAL_ICONS).forEach(icon => icon.classList.remove('active'));
+
+        $modalTitle.textContent = '';
+        $modalDescription.textContent = '';
+    }, 550);
 }
 
 const copyToClipboard = async (text: string): Promise<void> => {

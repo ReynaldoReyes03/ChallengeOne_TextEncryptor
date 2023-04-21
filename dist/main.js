@@ -64,8 +64,8 @@ const MODAL_ICONS = {
 };
 // #region REGULAR EXPRESSIONS
 // const pattern: RegExp = /[À-ðò-ÿA-Z]/;
-const pattern = /^[a-z\s]+$/;
-const flags = 'mg';
+const pattern = /^[a-zñ\s]+$/;
+const flags = 'g';
 const regExp = new RegExp(pattern, flags);
 // #endregion
 // #region GLOBAL SETTINGS
@@ -78,11 +78,11 @@ let animationTimeout = 0;
 // #endregion
 // #region FUNCTIONS
 const encrypt = (text) => {
-    Object.entries(KEYS_ENCRYPT).forEach(keyEncrypt => text = text.replace(new RegExp(keyEncrypt[0], 'img'), keyEncrypt[1]));
+    Object.entries(KEYS_ENCRYPT).forEach(keyEncrypt => text = text.replace(new RegExp(keyEncrypt[0], 'mg'), keyEncrypt[1]));
     return text;
 };
 const decrypt = (text) => {
-    Object.entries(KEYS_ENCRYPT).reverse().forEach(keyEncrypt => text = text.replace(new RegExp(keyEncrypt[1], 'img'), keyEncrypt[0]));
+    Object.entries(KEYS_ENCRYPT).reverse().forEach(keyEncrypt => text = text.replace(new RegExp(keyEncrypt[1], 'mg'), keyEncrypt[0]));
     return text;
 };
 const updateTextarea = ($textarea, text, interval = timeout) => {
@@ -123,12 +123,8 @@ const changeVisibleContainer = ($elementToShow, $elementToHide) => {
 };
 const openModalWindow = (type, title, description, timeout = modalLife) => {
     Object.entries(MODAL_ICONS).forEach((icon) => {
-        if (icon[0] === type.toString()) {
-            icon[1].style.setProperty('display', 'block');
-        }
-        else {
-            icon[1].style.setProperty('display', 'none');
-        }
+        if (icon[0] === type.toString())
+            icon[1].classList.add('active');
     });
     $modalTitle.textContent = title;
     $modalDescription.textContent = description;
@@ -139,6 +135,11 @@ const openModalWindow = (type, title, description, timeout = modalLife) => {
 const closeModalWindow = () => {
     $modal.classList.remove('open');
     $modal.classList.add('close');
+    setTimeout(() => {
+        Object.values(MODAL_ICONS).forEach(icon => icon.classList.remove('active'));
+        $modalTitle.textContent = '';
+        $modalDescription.textContent = '';
+    }, 550);
 };
 const copyToClipboard = async (text) => {
     text = text.trim();

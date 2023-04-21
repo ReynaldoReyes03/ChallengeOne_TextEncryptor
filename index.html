@@ -6,7 +6,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Text Encryptor | Reynaldo Martínez Reyes</title>
             <link rel="stylesheet" href="css/revert.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <link rel="stylesheet" href="fonts/icons/icons.min.css">
             <link rel="stylesheet" href="css/styles.css">
         </head>
         <body>
@@ -15,16 +15,16 @@
                     <div class="modal__box">
                         <div class="modal__icon-box">
                             <span class="modal__icon modal__icon--correct">
-                                <i class="fa-regular fa-circle-check"></i>
+                                <i class="icon-circle-check"></i>
                             </span>
                             <span class="modal__icon modal__icon--information">
-                                <i class="fa-regular fa-circle-check"></i>
+                                <i class="icon-circle-information"></i>
                             </span>
                             <span class="modal__icon modal__icon--warning">
-                                <i class="fa-regular fa-circle-check"></i>
+                                <i class="icon-circle-exclamation"></i>
                             </span>
                             <span class="modal__icon modal__icon--error">
-                                <i class="fa-regular fa-circle-xmark"></i>
+                                <i class="icon-circle-xmark"></i>
                             </span>
                         </div>
                         <h2 class="modal__title">Title</h2>
@@ -34,13 +34,13 @@
                 </div>
 
                 <header class="header">
-                    <a class="header__logo-container" href="http://" target="_blank" rel="noopener noreferrer">
-                        <img src="" alt="Alura Logo" class="header__logo">
+                    <a class="header__logo-container" href="https://www.aluracursos.com/" target="_blank">
+                        <i class="icon-alura-logo"></i>
                     </a>
                     <h1 class="header__title">Text Encryptor</h1>
                     <button class="button button__tools button--help">
                         <span class="button__icon">
-                            <i class="fa-solid fa-question"></i>
+                            <i class="icon-question"></i>
                         </span>
                         <span class="button__text">Help</span>
                     </button>
@@ -62,13 +62,13 @@
                             <div class="buttons-container buttons-container--box">
                                 <button class="button button__normal button--encrypt">
                                     <span class="button__icon">
-                                        <i class="fa-solid fa-lock"></i>
+                                        <i class="icon-lock"></i>
                                     </span>
                                     <span class="button__text">Encrypt</span>
                                 </button>
                                 <button class="button button__normal button--decrypt">
                                     <span class="button__icon">
-                                        <i class="fa-solid fa-lock-open"></i>
+                                        <i class="icon-lock-open"></i>
                                     </span>
                                     <span class="button__text">Decrypt</span>
                                 </button>
@@ -79,25 +79,25 @@
                         <div class="buttons-container buttons-container--tools">
                             <button class="button button__tools button--paste">
                                 <span class="button__icon">
-                                    <i class="fa-regular fa-paste"></i>
+                                    <i class="icon-paste"></i>
                                 </span>
                                 <span class="button__text">Paste</span>
                             </button>
                             <button class="button button__tools button--clear">
                                 <span class="button__icon">
-                                    <i class="fa-solid fa-xmark"></i>
+                                    <i class="icon-xmark"></i>
                                 </span>
                                 <span class="button__text">Clear</span>
                             </button>
                             <button class="button button__tools button--swap">
                                 <span class="button__icon">
-                                    <i class="fa-solid fa-right-left"></i>
+                                    <i class="icon-swap"></i>
                                 </span>
                                 <span class="button__text">Swap</span>
                             </button>
                             <button class="button button__tools button--reset">
                                 <span class="button__icon">
-                                    <i class="fa-solid fa-rotate-right"></i>
+                                    <i class="icon-reset"></i>
                                 </span>
                                 <span class="button__text">Reset</span>
                             </button>
@@ -114,12 +114,12 @@
                         <div class="container__box">
                             <div class="container__textarea-box">
                                 <label for="textarea-box__text" class="textarea-box__label">Your text...</label>
-                                <textarea name="" id="textarea-box__text" class="textarea"></textarea>
+                                <textarea name="" id="textarea-box__text" class="textarea" readonly></textarea>
                             </div>
                             <div class="buttons-container buttons-container--box">
                                 <button class="button button__normal button--copy">
                                     <span class="button__icon">
-                                        <i class="fa-regular fa-copy"></i>
+                                        <i class="icon-copy"></i>
                                     </span>
                                     <span class="button__text">Copy</span>
                                 </button>
@@ -134,7 +134,7 @@
                             <li class="social-media__item" style="--color: #0A66C2;">
                                 <a href="#" class="social-media__link">
                                     <span class="social-media__icon">
-                                        <i class="fa-brands fa-linkedin"></i>
+                                        <i class="icon-linkedin"></i>
                                     </span>
                                     <span class="social-media__text">LinkedIn</span>
                                 </a>
@@ -142,7 +142,7 @@
                             <li class="social-media__item" style="--color: #000000;">
                                 <a href="#" class="social-media__link">
                                     <span class="social-media__icon">
-                                        <i class="fa-brands fa-github"></i>
+                                        <i class="icon-github"></i>
                                     </span>
                                     <span class="social-media__text">GitHub</span>
                                 </a>
@@ -150,7 +150,7 @@
                             <li class="social-media__item" style="--color: #19B1F4;">
                                 <a href="#" class="social-media__link">
                                     <span class="social-media__icon">
-                                        <i class="fa-solid fa-globe"></i>
+                                        <i class="icon-world"></i>
                                     </span>
                                     <span class="social-media__text">WebSite</span>
                                 </a>
@@ -158,7 +158,7 @@
                             <li class="social-media__item" style="--color: #5865F2;">
                                 <a href="#" class="social-media__link">
                                     <span class="social-media__icon">
-                                        <i class="fa-brands fa-discord"></i>
+                                        <i class="icon-discord"></i>
                                     </span>
                                     <span class="social-media__text">Discord</span>
                                 </a>
@@ -166,7 +166,7 @@
                             <li class="social-media__item" style="--color: #E1306C;">
                                 <a href="#" class="social-media__link">
                                     <span class="social-media__icon">
-                                        <i class="fa-brands fa-instagram"></i>
+                                        <i class="icon-instagram"></i>
                                     </span>
                                     <span class="social-media__text">Intagram</span>
                                 </a>
@@ -174,7 +174,7 @@
                             <li class="social-media__item" style="--color: #4267B2;">
                                 <a href="#" class="social-media__link">
                                     <span class="social-media__icon">
-                                        <i class="fa-brands fa-facebook-f"></i>
+                                        <i class="icon-facebook"></i>
                                     </span>
                                     <span class="social-media__text">Facebook</span>
                                 </a>
@@ -182,7 +182,7 @@
                             <li class="social-media__item" style="--color: #FF0000;">
                                 <a href="#" class="social-media__link">
                                     <span class="social-media__icon">
-                                        <i class="fa-brands fa-youtube"></i>
+                                        <i class="icon-youtube"></i>
                                     </span>
                                     <span class="social-media__text">YouTube</span>
                                 </a>
@@ -190,7 +190,7 @@
                             <li class="social-media__item" style="--color: #1DA1F2;">
                                 <a href="#" class="social-media__link">
                                     <span class="social-media__icon">
-                                        <i class="fa-brands fa-twitter"></i>
+                                        <i class="icon-twitter"></i>
                                     </span>
                                     <span class="social-media__text">Twitter</span>
                                 </a>

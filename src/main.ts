@@ -33,6 +33,11 @@ const $inputForm: HTMLFormElement = document.getElementById('inputForm') as HTML
 // Advice
 const $advice: HTMLDivElement = document.querySelector('.advice') as HTMLDivElement;
 
+// SVG
+const $animatedSVG: SVGElement = document.querySelector('.container__image') as SVGElement;
+const $decorationPaths: NodeListOf<SVGPathElement> = document.querySelectorAll('.container__image--decorations path');
+const $centerPaths: NodeListOf<SVGPathElement> = document.querySelectorAll('.container__image--center path');
+
 // Enums
 enum ModalType { Success, Information, Warning, Error };
 enum DisplayType { None = 'none', Flex = 'flex' }
@@ -72,9 +77,12 @@ const regExp: RegExp  = new RegExp(pattern, flags);
 // #endregion
 
 // #region GLOBAL SETTINGS
-const timeout  : number      = 15;
-const modalLife: number      = 1500;
-let   writeInterval : number = 0;
+const timeout  : number = 15;
+const modalLife: number = 1500;
+
+let writeInterval : number    = 0;
+let animationInterval: number = 0
+let animationTimeout: number  = 0;
 // #endregion
 
 // #endregion
@@ -115,7 +123,19 @@ const changeAdviceVisibility = ($visible: boolean): void => {
     else $advice.classList.remove('visible');
 }
 
-const changeHTMLElementDisplay = ($htmlElement: HTMLElement, displayType: DisplayType): void => $htmlElement.style.setProperty('display', displayType);
+const changeHTMLElementDisplay = ($htmlElement: HTMLElement, displayType: DisplayType): void => {
+    const elementStyle = getComputedStyle($htmlElement);
+    const elementDisplay = elementStyle.getPropertyValue('display');
+
+    if (elementDisplay != displayType) {
+        $htmlElement.style.setProperty('display', displayType);
+        
+        if ($htmlElement === $infoContainer) {
+            if (displayType === DisplayType.Flex) startSVGAnimation($animatedSVG);
+            else stopSVGAnimation($animatedSVG, animationTimeout, animationInterval);
+        }
+    }
+};
 
 const changeVisibleContainer = ($elementToShow: HTMLElement, $elementToHide: HTMLElement): void => {
     clearTextarea($textareaOutput);
@@ -240,6 +260,32 @@ const checkTextareaValue = ($textarea: HTMLTextAreaElement): void => {
         else changeAdviceVisibility(false);
     }
 }
+
+const getPathsLength = ($paths: NodeListOf<SVGPathElement>): void => {
+    const pathsLengt: Array<number> = [...$paths].map($path => Math.ceil($path.getTotalLength()));
+    
+    console.log(pathsLengt.join(' '));
+};
+
+const startSVGAnimation = ($svgImage: SVGElement): void => {
+    $svgImage.classList.remove('active');
+    $svgImage.classList.toggle('active');
+    
+    animationTimeout = setTimeout(() => $svgImage.classList.toggle('active'), 7500);
+    
+    animationInterval = setInterval(() => {
+        $svgImage.classList.toggle('active');
+        
+        animationTimeout = setTimeout(() => $svgImage.classList.toggle('active'), 7500);
+    }, 8000);
+};
+
+const stopSVGAnimation = ($svgImage: SVGElement, timeout: number, interval: number): void => {
+    $svgImage.classList.remove('active');
+
+    clearTimeout(timeout);
+    clearInterval(interval);
+}
 // #endregion
 
 // #region EVENT LISTENERS
@@ -297,4 +343,6 @@ $swapButton.addEventListener('click', () => swapTextareasContent($textareaOutput
 $resetButton.addEventListener('click', () => reset($textareaInput, $textareaOutput));
 
 $copyButton.addEventListener('click', () => copyToClipboard($textareaOutput.value));
+
+startSVGAnimation($animatedSVG);
 // #endregion

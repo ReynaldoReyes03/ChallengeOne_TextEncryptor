@@ -5,3 +5,8 @@
     flex-direction : $direction;
     flex-wrap      : $wrap;
 }
+
+@mixin setupPath($length) {
+    stroke-dashoffset: $length;
+    stroke-dasharray: $length;
+}

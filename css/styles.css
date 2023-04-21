@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -361,9 +362,13 @@
 }
 .container__info {
   width: 30%;
-  gap: 2rem;
+  gap: 1rem;
   padding: 2rem;
   height: auto;
+}
+.container__image-box {
+  width: 10rem;
+  height: 10rem;
 }
 .container__encrypt-text {
   display: none;
@@ -426,6 +431,111 @@
   opacity: 1;
 }
 
+.container__image {
+  width: 100%;
+  height: 100%;
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.95);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.container__image.active {
+  opacity: 1;
+  animation: fill 1s ease 5.25s forwards;
+}
+.container__image.active .container__image--decorations path:nth-child(1) {
+  stroke-dashoffset: 75px;
+  stroke-dasharray: 75px;
+}
+.container__image.active .container__image--decorations path:nth-child(2) {
+  stroke-dashoffset: 74px;
+  stroke-dasharray: 74px;
+}
+.container__image.active .container__image--decorations path:nth-child(3) {
+  stroke-dashoffset: 55px;
+  stroke-dasharray: 55px;
+}
+.container__image.active .container__image--decorations path:nth-child(4) {
+  stroke-dashoffset: 54px;
+  stroke-dasharray: 54px;
+}
+.container__image.active .container__image--decorations path:nth-child(5) {
+  stroke-dashoffset: 62px;
+  stroke-dasharray: 62px;
+}
+.container__image.active .container__image--decorations path:nth-child(6) {
+  stroke-dashoffset: 61px;
+  stroke-dasharray: 61px;
+}
+.container__image.active .container__image--decorations path:nth-child(7) {
+  stroke-dashoffset: 65px;
+  stroke-dasharray: 65px;
+}
+.container__image.active .container__image--decorations path:nth-child(8) {
+  stroke-dashoffset: 64px;
+  stroke-dasharray: 64px;
+}
+.container__image.active .container__image--decorations path:nth-child(9) {
+  stroke-dashoffset: 47px;
+  stroke-dasharray: 47px;
+}
+.container__image.active .container__image--decorations path:nth-child(10) {
+  stroke-dashoffset: 48px;
+  stroke-dasharray: 48px;
+}
+.container__image.active .container__image--decorations path:nth-child(11) {
+  stroke-dashoffset: 43px;
+  stroke-dasharray: 43px;
+}
+.container__image.active .container__image--decorations path:nth-child(12) {
+  stroke-dashoffset: 41px;
+  stroke-dasharray: 41px;
+}
+.container__image.active .container__image--decorations path:nth-child(13) {
+  stroke-dashoffset: 40px;
+  stroke-dasharray: 40px;
+}
+.container__image.active .container__image--decorations path:nth-child(14) {
+  stroke-dashoffset: 41px;
+  stroke-dasharray: 41px;
+}
+.container__image.active .container__image--decorations path:nth-child(15) {
+  stroke-dashoffset: 41px;
+  stroke-dasharray: 41px;
+}
+.container__image.active .container__image--decorations path:nth-child(16) {
+  stroke-dashoffset: 38px;
+  stroke-dasharray: 38px;
+}
+.container__image.active .container__image--decorations path {
+  animation: drawPath 3s ease forwards;
+}
+.container__image.active .container__image--center path:nth-child(1) {
+  stroke-dashoffset: 243px;
+  stroke-dasharray: 243px;
+}
+.container__image.active .container__image--center path:nth-child(2) {
+  stroke-dashoffset: 32px;
+  stroke-dasharray: 32px;
+}
+.container__image.active .container__image--center path:nth-child(3) {
+  stroke-dashoffset: 26px;
+  stroke-dasharray: 26px;
+}
+.container__image.active .container__image--center path {
+  animation: drawPath 3s ease 2.5s forwards;
+}
+
+@keyframes fill {
+  to {
+    fill: rgba(255, 255, 255, 0.95);
+  }
+}
+@keyframes drawPath {
+  to {
+    stroke-dashoffset: 0px;
+  }
+}
 .footer {
   width: 100%;
   gap: 1rem;

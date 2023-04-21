@@ -36,9 +36,14 @@
     &__info {
         @extend .flex__column;
         width  : 30%;
-        gap    : 2rem;
+        gap    : 1rem;
         padding: 2rem;
         height : auto;
+    }
+
+    &__image-box {
+        width     : 10rem;
+        height    : 10rem;
     }
     
     &__encrypt-text {

@@ -8,11 +8,7 @@
     }
 
     &__item {
-        width : 3rem;
-        height: 3rem;
-        @extend .flex__row;
-        border-radius: 50%;
-        @extend .glass;
+        @extend .button-parent;
     }
 
     &__link {
@@ -20,17 +16,27 @@
         @extend .flex__column;
         text-decoration: none;
         position       : relative;
+        width          : 3rem;
+        height         : 3rem;
+        transition     : all 0.15s ease;
+
+        .social-media__item:hover & {
+            color: white;
+            transition-delay: 0.2s;
+        }
     }
+
 
     &__icon {
         font-size: 1.5em;
+        transition: all 0.5s ease;
     }
 
     &__text {
-        position : absolute;
-        bottom   : 0;
-        left     : 50%;
-        transform: translate(-50%, 100%);
-        display  : none;
+        @extend .button-text;
+
+        .social-media__item:hover & {
+            @extend .button-text--parent-hover;
+        }
     }
 }

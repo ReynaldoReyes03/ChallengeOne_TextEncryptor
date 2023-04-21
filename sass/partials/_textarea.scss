@@ -1,0 +1,37 @@
+@use 'extendClass';
+
+.textarea {
+    @extend .glass;
+    border-radius : 0.5rem;
+    min-height    : 250px;
+    width         : 100%;
+    padding       : 0.5rem;
+    color         : white;
+    font-size     : 0.9rem;
+    letter-spacing: 0.1rem;
+    line-height   : 1.1rem;
+    outline       : none;
+    text-align    : justify;
+    resize        : none;
+    overflow    : -moz-hidden-unscrollable;
+
+    /* Works on Firefox */
+    & {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.25);
+    }
+
+    /* Works on Chrome, Edge, and Safari */
+    &::-webkit-scrollbar {
+        width: 0.4rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.25);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius   : 5px;
+    }
+}

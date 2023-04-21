@@ -33,9 +33,12 @@
 
 .button {
     @extend .glass;
+    cursor: pointer;
+    color : white;
 
     &__icon {
         font-size: 1.5rem;
+        line-height: 3rem;
     }
 
     &__text {
@@ -43,16 +46,14 @@
     }
 
     &__tools {
-        position     : relative;
-        width        : 3rem;
-        height       : 3rem;
-        border-radius: 50%;
+        @extend .button-parent;
 
         .button__text {
-            position: absolute;
-            top     : 0;
-            left    : 0;
-            display : none;
+            @extend .button-text;
+        }
+
+        &:hover .button__text {
+            @extend .button-text--parent-hover;
         }
     }
 
@@ -62,8 +63,9 @@
         padding      : 0.5rem 1rem;
         width        : 100%;
         border-radius: 2rem;
-    }
 
-    cursor: pointer;
-    color : white;
+        .button__icon {
+            line-height: 1.5rem;
+        }
+    }
 }

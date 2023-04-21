@@ -37,9 +37,14 @@
     }
 
     &__icon-box {
-        width : 100px;
-        height: 100px;
+        width : 7rem;
+        height: 7rem;
         background: #000;
+        @extend .flex__column;
+    }
+
+    &__icon {
+        font-size: 6rem;
     }
 
     &__title {

@@ -1,23 +1,76 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
 * {
   margin: 0;
   padding: 0;
   font-family: "Open Sans", sans-serif;
 }
 
+:root {
+  --color: rgba(255, 255, 255, 0.281);
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-.glass, .social-media__item, .footer__social-media, .container, .textarea, .modal__box, .button, .header {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.505), rgba(255, 255, 255, 0.07));
+.glass, .footer__social-media, .textarea, .container, .modal__box, .button, .header, .button-text, .social-media__text, .button__tools .button__text, .button-parent, .social-media__item, .button__tools {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.046));
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-left-color: rgba(255, 255, 255, 0.75);
   border-top-color: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(1rem);
 }
 
-.flex__row, .social-media__list, .social-media__item, .container, .container__textarea, .modal, .button__normal {
+.button-parent, .social-media__item, .button__tools {
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.437);
+  transition: all 0.5s ease;
+  transition-delay: 0.2s;
+}
+.button-parent:hover, .social-media__item:hover, .button__tools:hover {
+  background: var(--color);
+  box-shadow: 0 0 5px var(--color), 0 0 15px var(--color), 0 0 30px var(--color), 0 0 60px var(--color);
+  border-color: var(--color);
+  transform: translateY(-0.8rem);
+  transition-delay: 0.2s;
+}
+
+.button-text, .social-media__text, .button__tools .button__text {
+  color: white;
+  position: absolute;
+  letter-spacing: 0.05rem;
+  font-size: 0.6rem;
+  bottom: 0;
+  left: 50%;
+  border-color: var(--color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  z-index: 10;
+  transform: translate(-50%, 100%) scale(0);
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+.button-text::before, .social-media__text::before, .button__tools .button__text::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color);
+  opacity: 0.3;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.button-text--parent-hover, .social-media__item:hover .social-media__text, .button__tools:hover .button__text {
+  transform: translate(-50%, 1.7rem) scale(1);
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.flex__row, .social-media__list, .container, .container__textarea, .modal, .button__normal, .button-parent, .social-media__item, .button__tools {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,12 +78,20 @@
   flex-wrap: wrap;
 }
 
-.flex__row--no-wrap, .advice, .buttons-container {
+.flex__row--no-wrap, .buttons-container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   flex-wrap: no-wrap;
+}
+
+.flex__row--justify-flex-start, .advice {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .flex__row--justify-space-between, .header {
@@ -49,7 +110,7 @@
   flex-wrap: wrap;
 }
 
-.flex__column, .social-media__link, .footer, .container__textarea-box, .container__box, .container__info {
+.flex__column, .social-media__link, .footer, .container__textarea-box, .container__box, .container__info, .modal__icon-box {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,10 +182,19 @@
 }
 @media (max-width: 767px) {
   .header__title {
-    font-size: 1.25rem;
-    letter-spacing: 0.1rem;
-    order: -1;
+    letter-spacing: 0.25rem;
+    order: 1;
     width: 100%;
+  }
+}
+.header__logo-container {
+  font-size: 3rem;
+  text-decoration: none;
+  color: white;
+}
+@media (max-width: 1023px) {
+  .header {
+    padding: 1.5rem 2rem;
   }
 }
 
@@ -160,27 +230,19 @@
 }
 .button__icon {
   font-size: 1.5rem;
+  line-height: 3rem;
 }
 .button__text {
   font-size: 0.8rem;
-}
-.button__tools {
-  position: relative;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-}
-.button__tools .button__text {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: none;
 }
 .button__normal {
   gap: 1rem;
   padding: 0.5rem 1rem;
   width: 100%;
   border-radius: 2rem;
+}
+.button__normal .button__icon {
+  line-height: 1.5rem;
 }
 
 .modal {
@@ -213,9 +275,12 @@
   }
 }
 .modal__icon-box {
-  width: 100px;
-  height: 100px;
+  width: 7rem;
+  height: 7rem;
   background: #000;
+}
+.modal__icon {
+  font-size: 6rem;
 }
 .modal__title {
   font-size: 1.5rem;
@@ -299,9 +364,9 @@
   gap: 2rem;
   padding: 2rem;
   height: auto;
-  display: none;
 }
 .container__encrypt-text {
+  display: none;
   width: 30%;
 }
 @media (max-width: 1023px) {
@@ -317,9 +382,34 @@
 }
 
 .textarea {
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   min-height: 250px;
   width: 100%;
+  padding: 0.5rem;
+  color: white;
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
+  line-height: 1.1rem;
+  outline: none;
+  text-align: justify;
+  resize: none;
+  overflow: -moz-hidden-unscrollable;
+  /* Works on Firefox */
+  /* Works on Chrome, Edge, and Safari */
+}
+.textarea {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.25);
+}
+.textarea::-webkit-scrollbar {
+  width: 0.4rem;
+}
+.textarea::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.25);
+}
+.textarea::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
 }
 
 .advice {
@@ -328,6 +418,12 @@
   left: 50%;
   transform: translate(-50%, 140%);
   width: 100%;
+  gap: 1rem;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.advice.visible {
+  opacity: 1;
 }
 
 .footer {
@@ -336,8 +432,9 @@
   text-align: center;
 }
 .footer__copyright {
+  font-size: 0.8rem;
   width: 100%;
-  padding: 1rem;
+  padding: 0.5rem;
   letter-spacing: 0.1rem;
   line-height: 1.5rem;
 }
@@ -350,25 +447,21 @@
   gap: 3rem;
   list-style: none;
 }
-.social-media__item {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-}
 .social-media__link {
   color: var(--color);
   text-decoration: none;
   position: relative;
+  width: 3rem;
+  height: 3rem;
+  transition: all 0.15s ease;
+}
+.social-media__item:hover .social-media__link {
+  color: white;
+  transition-delay: 0.2s;
 }
 .social-media__icon {
   font-size: 1.5em;
-}
-.social-media__text {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 100%);
-  display: none;
+  transition: all 0.5s ease;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -30,8 +30,12 @@ const $textareaOutput: HTMLTextAreaElement = document.getElementById('textarea-b
 // Form
 const $inputForm: HTMLFormElement = document.getElementById('inputForm') as HTMLFormElement;
 
+// Advice
+const $advice: HTMLDivElement = document.querySelector('.advice') as HTMLDivElement;
+
 // Enums
 enum ModalType { Success, Information, Warning, Error };
+enum DisplayType { None = 'none', Flex = 'flex' }
 
 // #region INTERFACES
 interface KeyEncrypt {
@@ -40,13 +44,6 @@ interface KeyEncrypt {
 
 interface Icon {
     [key: string]: HTMLSpanElement;
-}
-
-interface ModalSettings {
-    type       : ModalType,
-    title      : string,
-    description: string,
-    timeout    : number
 }
 // #endregion
 
@@ -75,18 +72,11 @@ const regExp: RegExp  = new RegExp(pattern, flags);
 // #endregion
 
 // #region GLOBAL SETTINGS
-const timeout  : number      = 50;
+const timeout  : number      = 15;
 const modalLife: number      = 1500;
 let   writeInterval : number = 0;
 // #endregion
 
-// Modal
-const modal: ModalSettings = {
-    type       : ModalType.Information,
-    title      : '',
-    description: '',
-    timeout    : modalLife
-}
 // #endregion
 
 // #region FUNCTIONS
@@ -120,25 +110,39 @@ const updateTextarea = ($textarea: HTMLTextAreaElement,text: string, interval: n
     }, interval);
 };
 
-const openModalWindow = (modal: ModalSettings) => {
+const changeAdviceVisibility = ($visible: boolean): void => {
+    if ($visible) $advice.classList.add('visible');
+    else $advice.classList.remove('visible');
+}
+
+const changeHTMLElementDisplay = ($htmlElement: HTMLElement, displayType: DisplayType): void => $htmlElement.style.setProperty('display', displayType);
+
+const changeVisibleContainer = ($elementToShow: HTMLElement, $elementToHide: HTMLElement): void => {
+    clearTextarea($textareaOutput);
+
+    changeHTMLElementDisplay($elementToShow, DisplayType.Flex);
+    changeHTMLElementDisplay($elementToHide, DisplayType.None);
+}
+
+const openModalWindow = (type: ModalType, title: string, description: string, timeout: number = modalLife): void => {
     Object.entries(MODAL_ICONS).forEach((icon: [string, HTMLSpanElement]) => {
-        if (icon[0] === modal.type.toString()) {
+        if (icon[0] === type.toString()) {
             icon[1].style.setProperty('display', 'block');
         } else {
             icon[1].style.setProperty('display', 'none');
         }
     });
 
-    $modalTitle.textContent       = modal.title;
-    $modalDescription.textContent = modal.description;
+    $modalTitle.textContent       = title;
+    $modalDescription.textContent = description;
 
     $modal.classList.remove('close');
     $modal.classList.add('open');
 
-    setTimeout(closeModalWindow, modal.timeout);
+    setTimeout(closeModalWindow, timeout);
 };
 
-const closeModalWindow = () => {
+const closeModalWindow = (): void => {
     $modal.classList.remove('open');
     $modal.classList.add('close');
 }
@@ -147,29 +151,18 @@ const copyToClipboard = async (text: string): Promise<void> => {
     text = text.trim();
 
     if (text === '') {
-        modal.type        = ModalType.Error;
-        modal.title       = 'Error';
-        modal.description = 'Your text is empty.';
-        modal.timeout     = modalLife;
+        openModalWindow(ModalType.Error, 'Error', 'Your text is empty.');
     } else {
         try {
             await navigator.clipboard.writeText(text);
-    
-            modal.type        = ModalType.Success;
-            modal.title       = 'Success';
-            modal.description = 'Text copied to clipboard.';
-            modal.timeout     = modalLife;
+
+            openModalWindow(ModalType.Success, 'Success', 'Text copied to clipboard.');
         } catch (error) {
-            modal.type        = ModalType.Error;
-            modal.title       = 'Error';
-            modal.description = 'Failed to copy text to clipboard.';
-            modal.timeout     = modalLife;
+            openModalWindow(ModalType.Error, 'Error', 'Failed to copy text to clipboard.');
     
             console.error(`Failed to copy text to clipboard: ${error}`);
         }
     }
-
-    openModalWindow(modal);
 };
 
 const pasteFromClipboard = async ($textarea: HTMLTextAreaElement): Promise<void> => {
@@ -177,40 +170,36 @@ const pasteFromClipboard = async ($textarea: HTMLTextAreaElement): Promise<void>
 
     try {
         $textarea.value = await navigator.clipboard.readText();
+
+        const text: string = $textareaInput.value.trim();
+
+        changeVisibleContainer($infoContainer, $encryptTextContainer);
+
+        if (!validateText(text)) changeAdviceVisibility(true);
     
-        modal.type        = ModalType.Success;
-        modal.title       = 'Success';
-        modal.description = 'Text pasted from clipboard.';
-        modal.timeout     = modalLife;
+        openModalWindow(ModalType.Success, 'Success', 'Text pasted from clipboard.');
     } catch (error) {
-        modal.type        = ModalType.Error;
-        modal.title       = 'Error';
-        modal.description = 'Failed to read clipboard content.';
-        modal.timeout     = modalLife;
+        openModalWindow(ModalType.Error, 'Error', 'Failed to read clipboard content.');
 
         console.error(`Failed to read clipboard content: ${error}`);
     }
-
-    openModalWindow(modal);
 }
 
 const clearTextarea = ($textarea: HTMLTextAreaElement): void => {
     clearInterval(writeInterval);
 
-    $textarea.value = ''
+    $textarea.value = '';
+    
+    changeAdviceVisibility(false);
 };
 
 const reset = (...$textareas: Array<HTMLTextAreaElement>): void => {
     clearInterval(writeInterval);
 
     $textareas.forEach($textarea => clearTextarea($textarea));
-
-    modal.type        = ModalType.Success;
-    modal.title       = 'Success';
-    modal.description = 'Text encryptor reset.';
-    modal.timeout     = modalLife;
     
-    openModalWindow(modal);
+    changeVisibleContainer($infoContainer, $encryptTextContainer);
+    openModalWindow(ModalType.Success, 'Success', 'Text encryptor reset.');
 };
 
 const swapTextareasContent = ($textareaFrom: HTMLTextAreaElement, $textareaTo: HTMLTextAreaElement): void => {
@@ -219,16 +208,15 @@ const swapTextareasContent = ($textareaFrom: HTMLTextAreaElement, $textareaTo: H
     const textToMove: string = $textareaFrom.value.trim();
 
     if (textToMove === '') {
-        modal.type        = ModalType.Error;
-        modal.title       = 'Error';
-        modal.description = 'Your text is empty.';
-        modal.timeout     = modalLife;
-
-        openModalWindow(modal);
+        openModalWindow(ModalType.Error, 'Error', 'Your text is empty.');
+        changeVisibleContainer($infoContainer, $encryptTextContainer);
     } else {
-        clearTextarea($textareaFrom);
-        clearTextarea($textareaTo);
-        updateTextarea($textareaTo, textToMove, 25);
+        if (validateText(textToMove)) {
+            reset($textareaFrom, $textareaTo);
+            updateTextarea($textareaTo, textToMove, 5);
+        } else {
+            openModalWindow(ModalType.Error, 'Error', 'Your text contains symbols or especial characters.');
+        }
     }
 }
 
@@ -239,9 +227,25 @@ const validateText = (text: string): boolean => {
 
     return regExp.test(text);
 }
+
+const checkTextareaValue = ($textarea: HTMLTextAreaElement): void => {
+    const text: string = $textarea.value.trim();
+
+    changeVisibleContainer($infoContainer, $encryptTextContainer);
+
+    if (text === '') {
+        changeAdviceVisibility(false);
+    } else {
+        if (!validateText(text)) changeAdviceVisibility(true);
+        else changeAdviceVisibility(false);
+    }
+}
 // #endregion
 
 // #region EVENT LISTENERS
+$textareaInput.addEventListener('keyup', () => checkTextareaValue($textareaInput));
+$textareaInput.addEventListener('change', () => checkTextareaValue($textareaInput));
+
 $inputForm.addEventListener('submit', (e: SubmitEvent): void => e.preventDefault());
 
 $modalButton.addEventListener('click', closeModalWindow);
@@ -251,71 +255,44 @@ $encryptButton.addEventListener('click', () => {
     let text: string = $textareaInput.value.trim();
 
     if (text === '') {
-        modal.type        = ModalType.Error;
-        modal.title       = 'Error';
-        modal.description = 'Your text is empty.';
-        modal.timeout     = modalLife;
+        openModalWindow(ModalType.Error, 'Error', 'Your text is empty.');
     } else {
         if (validateText(text)) {
-            text = encrypt(text);
-    
-            updateTextarea($textareaOutput, text);
-    
-            modal.type        = ModalType.Success;
-            modal.title       = 'Text Encrypted';
-            modal.description = 'Your text was encrypted.';
-            modal.timeout     = 1000;
+            changeVisibleContainer($encryptTextContainer, $infoContainer);
+            updateTextarea($textareaOutput, encrypt(text));
+            openModalWindow(ModalType.Success, 'Text Encrypted', 'Your text was encrypted.', 1000);
         } else {
-            modal.type        = ModalType.Error;
-            modal.title       = 'Error';
-            modal.description = 'Your text contains symbols or especial characters.';
-            modal.timeout     = modalLife;
+            openModalWindow(ModalType.Error, 'Error', 'Your text contains symbols or especial characters.');
         }
     }
-
-    openModalWindow(modal);
 });
 
 $decryptButton.addEventListener('click', () => {
     let text: string = $textareaInput.value.trim();
     
     if (text === '') {
-        modal.type        = ModalType.Error;
-        modal.title       = 'Error';
-        modal.description = 'Your text is empty.';
-        modal.timeout     = modalLife;
+        openModalWindow(ModalType.Error, 'Error', 'Your text is empty.');
     } else {
         if (validateText(text)) {
-            text = decrypt(text);
-    
-            updateTextarea($textareaOutput, text);
-    
-            modal.type        = ModalType.Success;
-            modal.title       = 'Text Decrypted';
-            modal.description = 'Your text was decrypted.';
-            modal.timeout     = 1000;
+            changeVisibleContainer($encryptTextContainer, $infoContainer);
+            updateTextarea($textareaOutput, decrypt(text));
+            openModalWindow(ModalType.Success, 'Text Decrypted', 'Your text was decrypted.', 1000);
         } else {
-            modal.type        = ModalType.Error;
-            modal.title       = 'Error';
-            modal.description = 'Your text contains symbols and characters.';
-            modal.timeout     = modalLife;
+            openModalWindow(ModalType.Error, 'Error', 'Your text contains symbols or especial characters.');
         }
     }
-
-    openModalWindow(modal);
 });
 
-$pasteButton.addEventListener('click', () => pasteFromClipboard($textareaInput));
+$pasteButton.addEventListener('click', () => {
+    pasteFromClipboard($textareaInput);
+});
+
 $clearButton.addEventListener('click', () => {
     clearTextarea($textareaInput);
-
-    modal.type        = ModalType.Success;
-    modal.title       = 'Success';
-    modal.description = 'Textarea cleared.';
-    modal.timeout     = modalLife;
-    
-    openModalWindow(modal);
+    changeVisibleContainer($infoContainer, $encryptTextContainer);
+    openModalWindow(ModalType.Success, 'Success', 'Textarea cleared.');
 });
+
 $swapButton.addEventListener('click', () => swapTextareasContent($textareaOutput, $textareaInput));
 $resetButton.addEventListener('click', () => reset($textareaInput, $textareaOutput));
 

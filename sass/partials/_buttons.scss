@@ -35,6 +35,7 @@
     @extend .glass;
     cursor: pointer;
     color : white;
+    outline: none;
 
     &__icon {
         font-size: 1.5rem;

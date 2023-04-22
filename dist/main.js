@@ -48,11 +48,24 @@ var ModalType;
     ModalType[ModalType["Error"] = 3] = "Error";
 })(ModalType || (ModalType = {}));
 ;
+var CSSProperty;
+(function (CSSProperty) {
+    CSSProperty["Display"] = "display";
+    CSSProperty["Overflow"] = "overflow";
+})(CSSProperty || (CSSProperty = {}));
+;
 var DisplayType;
 (function (DisplayType) {
     DisplayType["None"] = "none";
     DisplayType["Flex"] = "flex";
 })(DisplayType || (DisplayType = {}));
+;
+var OverflowType;
+(function (OverflowType) {
+    OverflowType["Auto"] = "auto";
+    OverflowType["Hidden"] = "hidden";
+})(OverflowType || (OverflowType = {}));
+;
 // #endregion
 // Keys
 const KEYS_ENCRYPT = {
@@ -70,10 +83,20 @@ const MODAL_ICONS = {
     [ModalType.Error]: document.querySelector('.modal__icon--error')
 };
 // #region REGULAR EXPRESSIONS
-// const pattern: RegExp = /[À-ðò-ÿA-Z]/;
-const pattern = /^[a-zñ\s]+$/;
+// Flags
 const flags = 'g';
-const regExp = new RegExp(pattern, flags);
+// Patterns
+const smallLettersPattern = /^[a-zñ\s]+$/;
+const numbersPattern = /[0-9]/;
+const capitalLettersPattern = /[A-ZÑ]/;
+const accentedLettersPattern = /[À-ðò-ÿ]/;
+const specialCharactersPattern = /[!-/:-@[-`{-¿]/;
+// Declarations
+const smallLettersRegExp = new RegExp(smallLettersPattern, flags);
+const numberRegExp = new RegExp(numbersPattern, flags);
+const capitalLettersRegExp = new RegExp(capitalLettersPattern, flags);
+const accentedLettersRegExp = new RegExp(accentedLettersPattern, flags);
+const specialCharactersRegExp = new RegExp(specialCharactersPattern, flags);
 // #endregion
 // #region GLOBAL SETTINGS
 const timeout = 15;
@@ -115,9 +138,9 @@ const changeAdviceVisibility = ($visible) => {
 };
 const changeHTMLElementDisplay = ($htmlElement, displayType) => {
     const elementStyle = getComputedStyle($htmlElement);
-    const elementDisplay = elementStyle.getPropertyValue('display');
+    const elementDisplay = elementStyle.getPropertyValue(CSSProperty.Display);
     if (elementDisplay != displayType) {
-        $htmlElement.style.setProperty('display', displayType);
+        $htmlElement.style.setProperty(CSSProperty.Display, displayType);
         if ($htmlElement === $infoContainer) {
             if (displayType === DisplayType.Flex) {
                 startSVGAnimation($animatedSVG);
@@ -130,13 +153,13 @@ const changeHTMLElementDisplay = ($htmlElement, displayType) => {
 };
 const changeHelpContainerVisibility = ($visible) => {
     if ($visible) {
-        document.body.style.setProperty('overflow', 'hidden');
+        document.body.style.setProperty(CSSProperty.Overflow, OverflowType.Hidden);
         $helpContainer.classList.remove('close');
         $helpContainer.classList.add('open');
     }
     else {
         setTimeout(() => {
-            document.body.style.setProperty('overflow', 'auto');
+            document.body.style.setProperty(CSSProperty.Overflow, OverflowType.Auto);
         }, 500);
         $helpContainer.classList.remove('open');
         $helpContainer.classList.add('close');
@@ -207,13 +230,13 @@ const reset = (...$textareas) => {
     clearInterval(writeInterval);
     $textareas.forEach($textarea => clearTextarea($textarea));
     changeVisibleContainer($infoContainer, $encryptTextContainer);
-    openModalWindow(ModalType.Success, 'Success', 'Text encryptor reset.');
+    openModalWindow(ModalType.Success, 'Success', 'The Text Encryptor was restored.');
 };
 const swapTextareasContent = ($textareaFrom, $textareaTo) => {
     clearInterval(writeInterval);
     const textToMove = $textareaFrom.value.trim();
     if (textToMove === '') {
-        openModalWindow(ModalType.Error, 'Error', 'Your text is empty.');
+        openModalWindow(ModalType.Warning, 'Error', 'There is no text to swap.');
         changeVisibleContainer($infoContainer, $encryptTextContainer);
     }
     else {
@@ -222,7 +245,8 @@ const swapTextareasContent = ($textareaFrom, $textareaTo) => {
             updateTextarea($textareaTo, textToMove, 5);
         }
         else {
-            openModalWindow(ModalType.Error, 'Error', 'Your text contains symbols or especial characters.');
+            const message = generateInvalidCharacterMessage(textToMove);
+            openModalWindow(ModalType.Warning, 'Error', message, 2500);
         }
     }
 };
@@ -231,11 +255,10 @@ const checkUserAgent = () => {
     var _a;
     if (!isFirefox())
         (_a = $helpContainer.querySelector('.help div')) === null || _a === void 0 ? void 0 : _a.removeChild($firefoxContainer);
-    console.log('object');
 };
 const validateText = (text) => {
-    regExp.lastIndex = 0;
-    return regExp.test(text);
+    smallLettersRegExp.lastIndex = 0;
+    return smallLettersRegExp.test(text);
 };
 const checkTextareaValue = ($textarea) => {
     const text = $textarea.value.trim();
@@ -277,6 +300,37 @@ $modalButton.addEventListener('click', closeModalWindow);
 $helpButton.addEventListener('click', () => changeHelpContainerVisibility(true));
 $closeHelp_1.addEventListener('click', () => changeHelpContainerVisibility(false));
 $closeHelp_2.addEventListener('click', () => changeHelpContainerVisibility(false));
+const generateInvalidCharacterMessage = (textToValidate) => {
+    let message = 'Your text contains ';
+    let errors = [];
+    numberRegExp.lastIndex = 0;
+    capitalLettersRegExp.lastIndex = 0;
+    accentedLettersRegExp.lastIndex = 0;
+    specialCharactersRegExp.lastIndex = 0;
+    if (numberRegExp.test(textToValidate))
+        errors.push('numbers');
+    if (capitalLettersRegExp.test(textToValidate))
+        errors.push('capital letters');
+    if (accentedLettersRegExp.test(textToValidate))
+        errors.push('accented letters');
+    if (specialCharactersRegExp.test(textToValidate))
+        errors.push('special characters');
+    if (errors.length < 1) {
+        message += 'some special character.';
+    }
+    else if (errors.length > 1) {
+        for (let i = 0; i < errors.length - 1; i++) {
+            message += errors[i];
+            if (i < errors.length - 2)
+                message += ', ';
+        }
+        message += ` and ${errors[errors.length - 1]}.`;
+    }
+    else {
+        message += `${errors[0]}.`;
+    }
+    return message;
+};
 $encryptButton.addEventListener('click', () => {
     let text = $textareaInput.value.trim();
     if (text === '') {
@@ -290,7 +344,8 @@ $encryptButton.addEventListener('click', () => {
             updateLabelText($labelOutput, 'Encrypted text:');
         }
         else {
-            openModalWindow(ModalType.Error, 'Error', 'Your text contains symbols or especial characters.');
+            const message = generateInvalidCharacterMessage(text);
+            openModalWindow(ModalType.Error, 'Error', message, 2500);
         }
     }
 });
@@ -307,7 +362,8 @@ $decryptButton.addEventListener('click', () => {
             updateLabelText($labelOutput, 'Decrypted text:');
         }
         else {
-            openModalWindow(ModalType.Error, 'Error', 'Your text contains symbols or especial characters.');
+            const message = generateInvalidCharacterMessage(text);
+            openModalWindow(ModalType.Error, 'Error', message, 2500);
         }
     }
 });
@@ -317,7 +373,7 @@ $pasteButton.addEventListener('click', () => {
 $clearButton.addEventListener('click', () => {
     clearTextarea($textareaInput);
     changeVisibleContainer($infoContainer, $encryptTextContainer);
-    openModalWindow(ModalType.Success, 'Success', 'Textarea cleared.');
+    openModalWindow(ModalType.Success, 'Success', 'The text area has been cleared.');
 });
 $swapButton.addEventListener('click', () => swapTextareasContent($textareaOutput, $textareaInput));
 $resetButton.addEventListener('click', () => reset($textareaInput, $textareaOutput));

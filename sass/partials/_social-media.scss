@@ -12,8 +12,9 @@
     }
 
     &__link {
-        color: var(--color);
         @extend .flex__column;
+        color          : var(--color);
+        outline        : none;
         text-decoration: none;
         position       : relative;
         width          : 3rem;

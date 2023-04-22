@@ -250,6 +250,7 @@
 .button {
   cursor: pointer;
   color: white;
+  outline: none;
 }
 .button__icon {
   font-size: 1.5rem;
@@ -435,6 +436,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 1.5rem 0 0 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.612);
   overflow-y: scroll;
   z-index: 20;
 }
@@ -442,6 +444,7 @@
   position: relative;
   padding: 2rem;
   gap: 2rem;
+  border: none;
 }
 .back-filter .help-container__button:nth-child(1) {
   position: absolute;
@@ -478,7 +481,6 @@
 }
 .back-filter .help-container__text {
   width: 100%;
-  font-size: 0.9rem;
   text-align: justify;
   line-height: 1.3rem;
 }
@@ -495,7 +497,6 @@
 .back-filter .help-list {
   list-style: none;
   gap: 1rem;
-  font-size: 0.9rem;
 }
 .back-filter .help-list__item {
   flex-wrap: nowrap;
@@ -507,7 +508,6 @@
 .back-filter .help-list__text {
   width: auto;
   line-height: 1.3rem;
-  font-size: 1rem;
 }
 .back-filter .help-list__icon {
   padding: 1rem;
@@ -693,6 +693,7 @@
 }
 .social-media__link {
   color: var(--color);
+  outline: none;
   text-decoration: none;
   position: relative;
   width: 3rem;

@@ -13,12 +13,34 @@
   box-sizing: border-box;
 }
 
-.glass, .footer__social-media, .textarea, .container, .modal__box, .button, .header, .button-text, .social-media__text, .button__tools .button__text, .button-parent, .social-media__item, .button__tools {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.046));
+.glass-border, .textarea:focus ~ .textarea-box__label, .textarea:not(:placeholder-shown) ~ .textarea-box__label, .glass, .footer__social-media, .textarea, .back-filter .help-container, .back-filter .help-container__icon, .back-filter .help-list__icon, .container, .modal__box, .button, .header, .button-text, .social-media__text, .button__tools .button__text, .button-parent, .social-media__item, .button__tools {
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-left-color: rgba(255, 255, 255, 0.75);
   border-top-color: rgba(255, 255, 255, 0.75);
+}
+
+.glass, .footer__social-media, .textarea, .back-filter .help-container, .back-filter .help-container__icon, .back-filter .help-list__icon, .container, .modal__box, .button, .header, .button-text, .social-media__text, .button__tools .button__text, .button-parent, .social-media__item, .button__tools {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.046));
   backdrop-filter: blur(1rem);
+}
+
+.custom-scrollbar, .textarea, .back-filter .help {
+  /* Works on Firefox */
+  /* Works on Chrome, Edge, and Safari */
+}
+.custom-scrollbar, .textarea, .back-filter .help {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.25);
+}
+.custom-scrollbar::-webkit-scrollbar, .textarea::-webkit-scrollbar, .back-filter .help::-webkit-scrollbar {
+  width: 0.4rem;
+}
+.custom-scrollbar::-webkit-scrollbar-track, .textarea::-webkit-scrollbar-track, .back-filter .help::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.25);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb, .textarea::-webkit-scrollbar-thumb, .back-filter .help::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
 }
 
 .button-parent, .social-media__item, .button__tools {
@@ -71,7 +93,7 @@
   transition-delay: 0.2s;
 }
 
-.flex__row, .social-media__list, .container, .container__textarea, .modal, .modal__icon.active, .button__normal, .button-parent, .social-media__item, .button__tools {
+.flex__row, .social-media__list, .back-filter .help-container, .container, .container__textarea, .modal, .modal__icon.active, .button__normal, .button-parent, .social-media__item, .button__tools {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,7 +109,7 @@
   flex-wrap: no-wrap;
 }
 
-.flex__row--justify-flex-start, .advice {
+.flex__row--justify-flex-start, .advice, .back-filter .help-list, .back-filter .help-list__item {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -111,7 +133,7 @@
   flex-wrap: wrap;
 }
 
-.flex__column, .social-media__link, .footer, .container__textarea-box, .container__box, .container__info {
+.flex__column, .social-media__link, .footer, .back-filter .help-container__content, .container__textarea-box, .container__box, .container__info {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -246,6 +268,40 @@
   line-height: 1.5rem;
 }
 
+@keyframes open {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  95% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes close {
+  0% {
+    transform: scale(1);
+  }
+  5% {
+    transform: scale(1.1);
+  }
+  30% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
 .modal {
   width: 100%;
   height: 100vh;
@@ -294,40 +350,6 @@
   line-height: 1.2rem;
 }
 
-@keyframes open {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  70% {
-    transform: scale(0.95);
-  }
-  95% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes close {
-  0% {
-    transform: scale(1);
-  }
-  5% {
-    transform: scale(1.1);
-  }
-  30% {
-    transform: scale(0.95);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(0);
-  }
-}
 .main {
   width: 100%;
   gap: 1rem;
@@ -368,9 +390,11 @@
   padding: 2rem;
   height: auto;
 }
+.container__text {
+  width: 100%;
+}
 .container__image-box {
-  width: 10rem;
-  height: 10rem;
+  width: clamp(10px, 55%, 250px);
 }
 .container__encrypt-text {
   display: none;
@@ -382,17 +406,121 @@
   }
 }
 
-.textarea-box__label {
+.help-container {
+  color: white;
+}
+
+.back-filter {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100vh;
+  backdrop-filter: blur(0.25rem);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.278), rgba(0, 0, 0, 0.165));
+  transform: scale(0);
+  z-index: 2;
+}
+.back-filter.open {
+  animation: open 0.5s forwards;
+}
+.back-filter.close {
+  animation: close 0.5s forwards;
+}
+.back-filter .help {
+  position: fixed;
+  width: 90vw;
+  height: 90vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 1.5rem 0 0 1.5rem;
+  overflow-y: scroll;
+  z-index: 20;
+}
+.back-filter .help-container {
+  position: relative;
+  padding: 2rem;
+  gap: 2rem;
+}
+.back-filter .help-container__button:nth-child(1) {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.back-filter .help-container__button:nth-child(1):hover {
+  transform: translate(0, 0);
+}
+.back-filter .help-container__icon {
+  width: 5rem;
+  height: 5rem;
+  line-height: 5rem;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 2rem;
+}
+.back-filter .help-container__content {
+  gap: 2rem;
+}
+.back-filter .help-container__title {
+  width: 100%;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+}
+.back-filter .help-container__title--big {
+  font-size: 1.8rem;
+  text-align: center;
+}
+.back-filter .help-container__title--medium {
+  font-size: 1.3rem;
+  text-align: left;
+  margin: 2rem 0 0;
+}
+.back-filter .help-container__text {
+  width: 100%;
+  font-size: 0.9rem;
+  text-align: justify;
+  line-height: 1.3rem;
+}
+.back-filter .help-container__text:last-child {
+  margin-top: 2rem;
+}
+.back-filter .help-container .firefox-info {
+  padding: 2rem;
+  gap: 2rem;
+}
+.back-filter .help-container .firefox-info .help-container__title {
+  margin-bottom: -3rem;
+}
+.back-filter .help-list {
+  list-style: none;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+.back-filter .help-list__item {
+  flex-wrap: nowrap;
+  text-align: justify;
+  line-height: 1.3rem;
+  width: 100%;
+  gap: 0.5rem;
+}
+.back-filter .help-list__text {
+  width: auto;
+  line-height: 1.3rem;
+  font-size: 1rem;
+}
+.back-filter .help-list__icon {
+  padding: 1rem;
+  line-height: 1.2rem;
+  font-size: 1.2rem;
+  border-radius: 50%;
 }
 
 .textarea {
   border-radius: 0.5rem;
   min-height: 250px;
   width: 100%;
-  padding: 0.5rem;
+  padding: 1rem;
   color: white;
   font-size: 0.9rem;
   letter-spacing: 0.1rem;
@@ -401,22 +529,26 @@
   text-align: justify;
   resize: none;
   overflow: -moz-hidden-unscrollable;
-  /* Works on Firefox */
-  /* Works on Chrome, Edge, and Safari */
 }
-.textarea {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.25);
+.textarea-box__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
+  line-height: 1.2rem;
+  z-index: 8;
+  transform: translate(1rem, 1rem);
+  transition: all 0.5s ease;
 }
-.textarea::-webkit-scrollbar {
-  width: 0.4rem;
-}
-.textarea::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.25);
-}
-.textarea::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 5px;
+.textarea:focus ~ .textarea-box__label, .textarea:not(:placeholder-shown) ~ .textarea-box__label {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.859), rgba(255, 255, 255, 0.338));
+  border-radius: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.7rem;
+  line-height: 1rem;
+  transform: translate(0.25rem, -0.6rem);
+  color: black;
 }
 
 .advice {

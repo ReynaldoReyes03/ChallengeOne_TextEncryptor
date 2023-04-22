@@ -2,6 +2,8 @@
 // #region BUTTONS
 const $modalButton: HTMLButtonElement   = document.querySelector('.button--modal') as HTMLButtonElement;
 const $helpButton: HTMLButtonElement    = document.querySelector('.button--help') as HTMLButtonElement;
+const $closeHelp_1: HTMLButtonElement   = document.querySelector('.help-container__button') as HTMLButtonElement;
+const $closeHelp_2: HTMLButtonElement   = document.querySelectorAll('.help-container__button')[1] as HTMLButtonElement;
 const $encryptButton: HTMLButtonElement = document.querySelector('.button--encrypt') as HTMLButtonElement;
 const $decryptButton: HTMLButtonElement = document.querySelector('.button--decrypt') as HTMLButtonElement;
 const $pasteButton: HTMLButtonElement   = document.querySelector('.button--paste') as HTMLButtonElement;
@@ -18,6 +20,8 @@ const $modalDescription: HTMLParagraphElement = document.querySelector('.modal__
 // #endregion
 
 // #region CONTAINERS
+const $helpContainer: HTMLDivElement        = document.querySelector('.back-filter') as HTMLDivElement;
+const $firefoxContainer: HTMLDivElement     = document.querySelector('.firefox-info') as HTMLDivElement;
 const $infoContainer: HTMLDivElement        = document.querySelector('.container__info') as HTMLDivElement;
 const $encryptTextContainer: HTMLDivElement = document.querySelector('.container__encrypt-text') as HTMLDivElement;
 // #endregion
@@ -26,6 +30,10 @@ const $encryptTextContainer: HTMLDivElement = document.querySelector('.container
 const $textareaInput: HTMLTextAreaElement  = document.getElementById('textarea-box__input') as HTMLTextAreaElement;
 const $textareaOutput: HTMLTextAreaElement = document.getElementById('textarea-box__text') as HTMLTextAreaElement;
 // #endregion
+
+// #region LABELS
+const $labelOutput: HTMLLabelElement = document.querySelectorAll('.textarea-box__label')[1] as HTMLLabelElement;
+// #endregio
 
 // Form
 const $inputForm: HTMLFormElement = document.getElementById('inputForm') as HTMLFormElement;
@@ -118,6 +126,10 @@ const updateTextarea = ($textarea: HTMLTextAreaElement,text: string, interval: n
     }, interval);
 };
 
+const updateLabelText = ($label: HTMLLabelElement, $text: string): void => {
+    $label.textContent = $text;
+};
+
 const changeAdviceVisibility = ($visible: boolean): void => {
     if ($visible) $advice.classList.add('visible');
     else $advice.classList.remove('visible');
@@ -131,11 +143,29 @@ const changeHTMLElementDisplay = ($htmlElement: HTMLElement, displayType: Displa
         $htmlElement.style.setProperty('display', displayType);
         
         if ($htmlElement === $infoContainer) {
-            if (displayType === DisplayType.Flex) startSVGAnimation($animatedSVG);
-            else stopSVGAnimation($animatedSVG, animationTimeout, animationInterval);
+            if (displayType === DisplayType.Flex) {
+                startSVGAnimation($animatedSVG);
+                updateLabelText($labelOutput, '');
+            } else stopSVGAnimation($animatedSVG, animationTimeout, animationInterval);
         }
     }
 };
+
+const changeHelpContainerVisibility = ($visible: boolean): void => {
+    if ($visible) {
+        document.body.style.setProperty('overflow', 'hidden');
+        
+        $helpContainer.classList.remove('close');
+        $helpContainer.classList.add('open');
+    } else {
+        setTimeout(() => {
+            document.body.style.setProperty('overflow', 'auto');
+        }, 500);
+
+        $helpContainer.classList.remove('open');
+        $helpContainer.classList.add('close');
+    }
+}
 
 const changeVisibleContainer = ($elementToShow: HTMLElement, $elementToHide: HTMLElement): void => {
     clearTextarea($textareaOutput);
@@ -167,7 +197,7 @@ const closeModalWindow = (): void => {
 
         $modalTitle.textContent = '';
         $modalDescription.textContent = '';
-    }, 550);
+    }, 300);
 }
 
 const copyToClipboard = async (text: string): Promise<void> => {
@@ -245,6 +275,11 @@ const swapTextareasContent = ($textareaFrom: HTMLTextAreaElement, $textareaTo: H
 
 const isFirefox = (): boolean => navigator.userAgent.toLowerCase().includes('firefox');
 
+const checkUserAgent = (): void => {
+    if (!isFirefox()) $helpContainer.querySelector('.help div')?.removeChild($firefoxContainer);
+    console.log('object');
+}
+
 const validateText = (text: string): boolean => {
     regExp.lastIndex = 0;
 
@@ -298,7 +333,11 @@ $textareaInput.addEventListener('change', () => checkTextareaValue($textareaInpu
 $inputForm.addEventListener('submit', (e: SubmitEvent): void => e.preventDefault());
 
 $modalButton.addEventListener('click', closeModalWindow);
-$helpButton.addEventListener('click', () => console.log('Open help window'));
+
+$helpButton.addEventListener('click', () => changeHelpContainerVisibility(true));
+
+$closeHelp_1.addEventListener('click', () => changeHelpContainerVisibility(false));
+$closeHelp_2.addEventListener('click', () => changeHelpContainerVisibility(false));
 
 $encryptButton.addEventListener('click', () => {
     let text: string = $textareaInput.value.trim();
@@ -310,6 +349,7 @@ $encryptButton.addEventListener('click', () => {
             changeVisibleContainer($encryptTextContainer, $infoContainer);
             updateTextarea($textareaOutput, encrypt(text));
             openModalWindow(ModalType.Success, 'Text Encrypted', 'Your text was encrypted.', 1000);
+            updateLabelText($labelOutput, 'Encrypted text:');
         } else {
             openModalWindow(ModalType.Error, 'Error', 'Your text contains symbols or especial characters.');
         }
@@ -326,6 +366,7 @@ $decryptButton.addEventListener('click', () => {
             changeVisibleContainer($encryptTextContainer, $infoContainer);
             updateTextarea($textareaOutput, decrypt(text));
             openModalWindow(ModalType.Success, 'Text Decrypted', 'Your text was decrypted.', 1000);
+            updateLabelText($labelOutput, 'Decrypted text:');
         } else {
             openModalWindow(ModalType.Error, 'Error', 'Your text contains symbols or especial characters.');
         }
@@ -348,4 +389,5 @@ $resetButton.addEventListener('click', () => reset($textareaInput, $textareaOutp
 $copyButton.addEventListener('click', () => copyToClipboard($textareaOutput.value));
 
 startSVGAnimation($animatedSVG);
+checkUserAgent();
 // #endregion

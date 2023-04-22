@@ -1,4 +1,5 @@
 @use 'extendClass';
+@use 'animations';
 
 .modal {
     @extend .flex__row;
@@ -60,49 +61,5 @@
         text-align: justify;
         font-size: 0.9rem;
         line-height: 1.2rem;
-    }
-}
-
-@keyframes open {
-    0% {
-        transform: scale(0);
-    }
-    
-    50% {
-        transform: scale(1.2);
-    }
-    
-    70% {
-        transform: scale(0.95);
-    }
-    
-    95% {
-        transform: scale(1.1);
-    }
-    
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes close {
-    0% {
-        transform: scale(1);
-    }
-    
-    5% {
-        transform: scale(1.1);
-    }
-    
-    30% {
-        transform: scale(0.95);
-    }
-    
-    50% {
-        transform: scale(1.2);
-    }
-
-    100% {
-        transform: scale(0);
     }
 }

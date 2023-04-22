@@ -41,9 +41,12 @@
         height : auto;
     }
 
+    &__text {
+        width: 100%;
+    }
+
     &__image-box {
-        width     : 10rem;
-        height    : 10rem;
+        width     : clamp(10px, 55%, 250px);
     }
     
     &__encrypt-text {
@@ -58,10 +61,6 @@
     }
 }
 
-.textarea-box {
-    &__label {
-        position: absolute;
-        top     : 0;
-        left    : 0;
-    }
+.help-container {
+    color: white;
 }

@@ -1,0 +1,134 @@
+@use 'extendClass';
+
+.back-filter {
+    position       : absolute;
+    top            : 0;
+    left           : 0;
+    width          : 100%;
+    height         : 100vh;
+    backdrop-filter: blur(0.25rem);
+    background     : linear-gradient(135deg, rgba(0, 0, 0, 0.278), rgba(0, 0, 0, 0.165));
+    transform: scale(0);
+    z-index        : 2;
+
+    &.open {
+        animation: open 0.5s forwards;
+    }
+
+    &.close {
+        animation: close 0.5s forwards;
+    }
+
+    .help {
+        @extend .custom-scrollbar;
+        position     : fixed;
+        width        : 90vw;
+        height       : 90vh;
+        top          : 50%;
+        left         : 50%;
+        transform    : translate(-50%, -50%);
+        border-radius: 1.5rem 0 0 1.5rem;
+        overflow-y   : scroll;
+        z-index      : 20;
+        
+        &-container {
+            @extend .glass;
+            @extend .flex__row;
+            position: relative;
+            padding : 2rem;
+            gap     : 2rem;
+
+            &__button:nth-child(1) {
+                position: absolute;
+                top     : 1rem;
+                right   : 1rem;
+
+                &:hover {
+                    transform: translate(0, 0);
+                }
+            }
+
+            &__icon {
+                @extend .glass;
+                width        : 5rem;
+                height       : 5rem;
+                line-height  : 5rem;
+                text-align   : center;
+                border-radius: 50%;
+                font-size    : 2rem;
+            }
+
+            &__content {
+                @extend .flex__column;
+                gap: 2rem;
+            }
+
+            &__title {
+                width         : 100%;
+                letter-spacing: 0.2rem;
+                text-transform: uppercase;
+
+                &--big {
+                    font-size : 1.8rem;
+                    text-align: center;
+                }
+
+                &--medium {
+                    font-size : 1.3rem;
+                    text-align: left;
+                    margin    : 2rem 0 0;
+                }
+            }
+
+            &__text {
+                width      : 100%;
+                font-size  : 0.9rem;
+                text-align : justify;
+                line-height: 1.3rem;
+
+                &:last-child {
+                    margin-top: 2rem;
+                }
+            }
+
+            & .firefox-info {
+                padding: 2rem;
+                gap    : 2rem;
+
+                & .help-container__title {
+                    margin-bottom: -3rem;
+                }
+            }
+        }
+
+        &-list {
+            @extend .flex__row--justify-flex-start;
+            list-style: none;
+            gap       : 1rem;
+            font-size : 0.9rem;
+
+            &__item {
+                @extend .flex__row--justify-flex-start;
+                flex-wrap  : nowrap;
+                text-align : justify;
+                line-height: 1.3rem;
+                width      : 100%;
+                gap        : 0.5rem;
+            }
+
+            &__text {
+                width      : auto;
+                line-height: 1.3rem;
+                font-size  : 1rem;
+            }
+
+            &__icon {
+                @extend .glass;
+                padding      : 1rem;
+                line-height  : 1.2rem;
+                font-size    : 1.2rem;
+                border-radius: 50%;
+            }
+        }
+    }
+}

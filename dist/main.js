@@ -3,6 +3,8 @@
 // #region BUTTONS
 const $modalButton = document.querySelector('.button--modal');
 const $helpButton = document.querySelector('.button--help');
+const $closeHelp_1 = document.querySelector('.help-container__button');
+const $closeHelp_2 = document.querySelectorAll('.help-container__button')[1];
 const $encryptButton = document.querySelector('.button--encrypt');
 const $decryptButton = document.querySelector('.button--decrypt');
 const $pasteButton = document.querySelector('.button--paste');
@@ -17,6 +19,8 @@ const $modalTitle = document.querySelector('.modal__title');
 const $modalDescription = document.querySelector('.modal__description');
 // #endregion
 // #region CONTAINERS
+const $helpContainer = document.querySelector('.back-filter');
+const $firefoxContainer = document.querySelector('.firefox-info');
 const $infoContainer = document.querySelector('.container__info');
 const $encryptTextContainer = document.querySelector('.container__encrypt-text');
 // #endregion
@@ -24,6 +28,9 @@ const $encryptTextContainer = document.querySelector('.container__encrypt-text')
 const $textareaInput = document.getElementById('textarea-box__input');
 const $textareaOutput = document.getElementById('textarea-box__text');
 // #endregion
+// #region LABELS
+const $labelOutput = document.querySelectorAll('.textarea-box__label')[1];
+// #endregio
 // Form
 const $inputForm = document.getElementById('inputForm');
 // Advice
@@ -97,6 +104,9 @@ const updateTextarea = ($textarea, text, interval = timeout) => {
             clearInterval(writeInterval);
     }, interval);
 };
+const updateLabelText = ($label, $text) => {
+    $label.textContent = $text;
+};
 const changeAdviceVisibility = ($visible) => {
     if ($visible)
         $advice.classList.add('visible');
@@ -109,11 +119,27 @@ const changeHTMLElementDisplay = ($htmlElement, displayType) => {
     if (elementDisplay != displayType) {
         $htmlElement.style.setProperty('display', displayType);
         if ($htmlElement === $infoContainer) {
-            if (displayType === DisplayType.Flex)
+            if (displayType === DisplayType.Flex) {
                 startSVGAnimation($animatedSVG);
+                updateLabelText($labelOutput, '');
+            }
             else
                 stopSVGAnimation($animatedSVG, animationTimeout, animationInterval);
         }
+    }
+};
+const changeHelpContainerVisibility = ($visible) => {
+    if ($visible) {
+        document.body.style.setProperty('overflow', 'hidden');
+        $helpContainer.classList.remove('close');
+        $helpContainer.classList.add('open');
+    }
+    else {
+        setTimeout(() => {
+            document.body.style.setProperty('overflow', 'auto');
+        }, 500);
+        $helpContainer.classList.remove('open');
+        $helpContainer.classList.add('close');
     }
 };
 const changeVisibleContainer = ($elementToShow, $elementToHide) => {
@@ -139,7 +165,7 @@ const closeModalWindow = () => {
         Object.values(MODAL_ICONS).forEach(icon => icon.classList.remove('active'));
         $modalTitle.textContent = '';
         $modalDescription.textContent = '';
-    }, 550);
+    }, 300);
 };
 const copyToClipboard = async (text) => {
     text = text.trim();
@@ -201,6 +227,12 @@ const swapTextareasContent = ($textareaFrom, $textareaTo) => {
     }
 };
 const isFirefox = () => navigator.userAgent.toLowerCase().includes('firefox');
+const checkUserAgent = () => {
+    var _a;
+    if (!isFirefox())
+        (_a = $helpContainer.querySelector('.help div')) === null || _a === void 0 ? void 0 : _a.removeChild($firefoxContainer);
+    console.log('object');
+};
 const validateText = (text) => {
     regExp.lastIndex = 0;
     return regExp.test(text);
@@ -242,7 +274,9 @@ $textareaInput.addEventListener('keyup', () => checkTextareaValue($textareaInput
 $textareaInput.addEventListener('change', () => checkTextareaValue($textareaInput));
 $inputForm.addEventListener('submit', (e) => e.preventDefault());
 $modalButton.addEventListener('click', closeModalWindow);
-$helpButton.addEventListener('click', () => console.log('Open help window'));
+$helpButton.addEventListener('click', () => changeHelpContainerVisibility(true));
+$closeHelp_1.addEventListener('click', () => changeHelpContainerVisibility(false));
+$closeHelp_2.addEventListener('click', () => changeHelpContainerVisibility(false));
 $encryptButton.addEventListener('click', () => {
     let text = $textareaInput.value.trim();
     if (text === '') {
@@ -253,6 +287,7 @@ $encryptButton.addEventListener('click', () => {
             changeVisibleContainer($encryptTextContainer, $infoContainer);
             updateTextarea($textareaOutput, encrypt(text));
             openModalWindow(ModalType.Success, 'Text Encrypted', 'Your text was encrypted.', 1000);
+            updateLabelText($labelOutput, 'Encrypted text:');
         }
         else {
             openModalWindow(ModalType.Error, 'Error', 'Your text contains symbols or especial characters.');
@@ -269,6 +304,7 @@ $decryptButton.addEventListener('click', () => {
             changeVisibleContainer($encryptTextContainer, $infoContainer);
             updateTextarea($textareaOutput, decrypt(text));
             openModalWindow(ModalType.Success, 'Text Decrypted', 'Your text was decrypted.', 1000);
+            updateLabelText($labelOutput, 'Decrypted text:');
         }
         else {
             openModalWindow(ModalType.Error, 'Error', 'Your text contains symbols or especial characters.');
@@ -287,5 +323,6 @@ $swapButton.addEventListener('click', () => swapTextareasContent($textareaOutput
 $resetButton.addEventListener('click', () => reset($textareaInput, $textareaOutput));
 $copyButton.addEventListener('click', () => copyToClipboard($textareaOutput.value));
 startSVGAnimation($animatedSVG);
+checkUserAgent();
 // #endregion
 //# sourceMappingURL=main.js.map

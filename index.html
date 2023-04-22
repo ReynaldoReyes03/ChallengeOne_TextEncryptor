@@ -33,6 +33,78 @@
                     </div>
                 </div>
 
+                <div class="back-filter">
+                    <div class="help">
+                        <div class="help-container">
+                            <button class="button button__tools help-container__button">
+                                <i class="icon-xmark"></i>
+                            </button>
+                            <span class="help-container__icon">
+                                <i class="icon-question"></i>
+                            </span>
+                            <h2 class="help-container__title help-container__title--big">HELP</h2>
+                            <section class="help-container__content">
+                                <p class="help-container__text">
+                                    Text encryption helps you keep your messages safe. You can encrypt and decrypt the messages you enter in the main text area.
+                                </p>
+                                <h3 class="help-container__title help-container__title--medium">Steps of use</h3>
+                                <ul class="help-list">
+                                    <li class="help-list__item">Enter your text in the main text area. This text is only valid if it is in lowercase and does not contain any other symbols or special characters. If you insert any characters that are not valid, you will be notified.</li>
+                                    <li class="help-list__item">Click some button, you can choose to encrypt or decrypt.</li>
+                                    <li class="help-list__item">Then your text will appear in another text area with the option you have chosen in the previous step.</li>
+                                </ul>
+                                <h3 class="help-container__title help-container__title--medium">You have buttons to</h3>
+                                <ul class="help-list">
+                                    <li class="help-list__item">
+                                        <span class="help-list__icon">
+                                            <i class="icon-paste"></i>
+                                        </span>
+                                        <span class="help-list__text">Paste the text you have on your clipboard.</span>
+                                    </li>
+                                    <li class="help-list__item">
+                                        <span class="help-list__icon">
+                                            <i class="icon-xmark"></i>
+                                        </span>
+                                        <span class="help-list__text">Clear the main text area.</span>
+                                    </li>
+                                    <li class="help-list__item">
+                                        <span class="help-list__icon">
+                                            <i class="icon-swap"></i>
+                                        </span>
+                                        <span class="help-list__text">Swap the text you have in the encrypted text area to the main text area.</span>
+                                    </li>
+                                    <li class="help-list__item">
+                                        <span class="help-list__icon">
+                                            <i class="icon-reset"></i>
+                                        </span>
+                                        <span class="help-list__text">Reset the text cipher to its original state.</span>
+                                    </li>
+                                    <li class="help-list__item">
+                                        <span class="help-list__icon">
+                                            <i class="icon-copy"></i>
+                                        </span>
+                                        <span class="help-list__text">Copy the text that you have encrypted or decrypted.</span>
+                                    </li>
+                                </ul>
+                                <p class="help-container__text">
+                                    Finally, at the bottom, you have the footer with the creator's copyright and all his social media links. You can go and help him be more recognized and support him.
+                                </p>
+                            </section>
+                            
+                            <section class="firefox-info container">
+                                <span class="help-container__icon">
+                                    <i class="icon-firefox"></i>
+                                </span>
+                                <h2 class="help-container__title help-container__title--big">ADVICE</h2>
+                                <p class="help-container__text">
+                                    You are using Firefox, we can not access your clipboard and some text encryptor features do not work for you in this browser. We recommend using another browser, but you can use the text encryptor in this browser if you want, but with less features, sorry <i class="icon-sad"></i>.
+                                </p>
+                            </section>
+                            <button class="button button__normal help-container__button">Close</button>
+                        </div>
+                    </div>
+                </div>
+
                 <header class="header">
                     <a class="header__logo-container" href="https://www.aluracursos.com/" target="_blank">
                         <i class="icon-alura-logo"></i>
@@ -50,8 +122,8 @@
                     <div class="container container__textarea">
                         <form id="inputForm" class="container__box" accept="#">
                             <div class="container__textarea-box">
-                                <label for="textarea-box__input" class="textarea-box__label">Enter your text...</label>
-                                <textarea name="" id="textarea-box__input" class="textarea"></textarea>
+                                <textarea name="" id="textarea-box__input" class="textarea" placeholder="  "></textarea>
+                                <label for="textarea-box__input" class="textarea-box__label">Enter your text</label>
                                 <div class="advice">
                                     <span class="advice__icon">
                                         <i class="icon-circle-exclamation"></i>
@@ -218,8 +290,8 @@
                     <div class="container container__encrypt-text">
                         <div class="container__box">
                             <div class="container__textarea-box">
-                                <label for="textarea-box__text" class="textarea-box__label">Your text...</label>
                                 <textarea name="" id="textarea-box__text" class="textarea" readonly></textarea>
+                                <label for="textarea-box__text" class="textarea-box__label">Your text...</label>
                             </div>
                             <div class="buttons-container buttons-container--box">
                                 <button class="button button__normal button--copy">

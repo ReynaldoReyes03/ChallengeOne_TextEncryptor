@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
 
 * {
     margin     : 0;
@@ -7,8 +7,31 @@
 }
 
 :root {
-    --color: rgba(255, 255, 255, 0.281);
+    --color                      : rgba(255, 255, 255, 0.3);
+    --background-gradient-color-1: rgb(0, 43, 91);
+    --background-gradient-color-2: rgb(26, 95, 122);
+    --button-border-color        : rgba(255, 255, 255, 0.4);
+    --glass-gradient-color-1     : rgba(255, 255, 255, 0.35);
+    --glass-gradient-color-2     : rgba(255, 255, 255, 0.045);
+    --glass-border-color-1       : rgba(255, 255, 255, 0.75);
+    --glass-border-color-2       : rgba(255, 255, 255, 0.25);
+    --help-background-color-1    : rgba(0, 0, 0, 0.278);
+    --help-background-color-2    : rgba(0, 0, 0, 0.165);
+    --label-background-color-1   : rgba(255, 255, 255, 0.86);
+    --label-background-color-2   : rgba(255, 255, 255, 0.34);
+    --label-text-color           : rgba(0, 0, 0);
+    --scrollbar-track-color      : rgba(255, 255, 255, 0.25);
+    --scrollbar-thumb-color      : rgba(255, 255, 255, 0.5);
+    --svg-fill-color             : rgba(255, 255, 255, 0.95);
+    --svg-stroke-color           : rgba(255, 255, 255, 0.95);
+    --text-color                 : rgb(255, 255, 255);
+    --transparent-color          : transparent;
 }
+
+// --background-gradient-color-1: rgb(0, 0, 0);
+// --background-gradient-color-2: rgb(65, 65, 65);
+// --background-gradient-color-1: rgb(0, 13, 107);
+// --background-gradient-color-2: rgb(156, 25, 224);
 
 *, *::before, *::after {
     box-sizing: border-box;

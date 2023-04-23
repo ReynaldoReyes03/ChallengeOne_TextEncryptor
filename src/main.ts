@@ -21,6 +21,7 @@ const $modalDescription: HTMLParagraphElement = document.querySelector('.modal__
 
 // #region CONTAINERS
 const $helpContainer: HTMLDivElement        = document.querySelector('.back-filter') as HTMLDivElement;
+const $helpScrollContainer: HTMLDivElement  = document.querySelector('.help') as HTMLDivElement;
 const $firefoxContainer: HTMLDivElement     = document.querySelector('.firefox-info') as HTMLDivElement;
 const $infoContainer: HTMLDivElement        = document.querySelector('.container__info') as HTMLDivElement;
 const $encryptTextContainer: HTMLDivElement = document.querySelector('.container__encrypt-text') as HTMLDivElement;
@@ -169,6 +170,7 @@ const changeHelpContainerVisibility = ($visible: boolean): void => {
     if ($visible) {
         document.body.style.setProperty(CSSProperty.Overflow, OverflowType.Hidden);
         
+        $helpScrollContainer.scrollTop = 0;
         $helpContainer.classList.remove('close');
         $helpContainer.classList.add('open');
     } else {

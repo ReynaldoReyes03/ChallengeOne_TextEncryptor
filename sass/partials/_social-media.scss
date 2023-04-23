@@ -1,4 +1,5 @@
 @use 'extendClass';
+@use 'variables' as *;
 
 .social-media {
     &__list {
@@ -13,7 +14,7 @@
 
     &__link {
         @extend .flex__column;
-        color          : var(--color);
+        color          : $text-color;
         outline        : none;
         text-decoration: none;
         position       : relative;
@@ -22,11 +23,10 @@
         transition     : all 0.15s ease;
 
         .social-media__item:hover & {
-            color: white;
+            color           : $text-color;
             transition-delay: 0.2s;
         }
     }
-
 
     &__icon {
         font-size: 1.5em;

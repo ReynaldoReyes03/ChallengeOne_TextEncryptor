@@ -20,6 +20,7 @@ const $modalDescription = document.querySelector('.modal__description');
 // #endregion
 // #region CONTAINERS
 const $helpContainer = document.querySelector('.back-filter');
+const $helpScrollContainer = document.querySelector('.help');
 const $firefoxContainer = document.querySelector('.firefox-info');
 const $infoContainer = document.querySelector('.container__info');
 const $encryptTextContainer = document.querySelector('.container__encrypt-text');
@@ -154,6 +155,7 @@ const changeHTMLElementDisplay = ($htmlElement, displayType) => {
 const changeHelpContainerVisibility = ($visible) => {
     if ($visible) {
         document.body.style.setProperty(CSSProperty.Overflow, OverflowType.Hidden);
+        $helpScrollContainer.scrollTop = 0;
         $helpContainer.classList.remove('close');
         $helpContainer.classList.add('open');
     }

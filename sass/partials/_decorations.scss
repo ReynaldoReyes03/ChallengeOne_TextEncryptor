@@ -1,0 +1,82 @@
+@use 'extendClass';
+@use 'variables' as *;
+
+.background {
+    position  : fixed;
+    top       : 0;
+    left      : 0;
+    width     : 100%;
+    height    : 100%;
+    background: linear-gradient(135deg, $background-gradient-color-1, $background-gradient-color-2);
+}
+
+.decoration {
+    width   : 100vw;
+    height  : 100vh;
+    position: fixed;
+    
+    &::before {
+        @extend .decoration-base;
+    }
+
+    &::after {
+        @extend .decoration-base;
+        @extend .decoration__background--2;
+    }
+
+    &__1 {
+        &::before {
+            width    : 75vh;
+            height   : 75vh;
+            top      : 0;
+            left     : 0;
+            transform: translate(-25%, -25%);
+        }
+        
+        &::after {
+            width    : 50vh;
+            height   : 50vh;
+            bottom   : 0;
+            right    : 0;
+            transform: translate(25%, 25%);
+        }
+    }
+
+    &__2 {
+        &::before {
+                width    : 25vh;
+            height   : 25vh;
+            bottom   : 0;
+            left     : 0;
+            transform: translate(50%, -50%);
+        }
+        
+        &::after {
+            width    : 35vh;
+            height   : 35vh;
+            top      : 40%;
+            left     : 60%;
+            transform: translate(25%, -50%);
+        }
+    }
+}
+
+// #region PALETTES
+    // --color-1: #472183;
+    // --color-2: #4B56D2;
+
+    // --color-1: #03001C;
+    // --color-2: #301E67;
+
+    // --color-1: #0A4D68;
+    // --color-2: #088395;
+
+    // --color-1: rgb(0, 13, 107);
+    // --color-2: rgb(156, 25, 224);
+
+    // --color-1: #1C315E;
+    // --color-2: #227C70;
+
+    // --color-1: #00BDAA;
+    // --color-2: #400082;
+// #endregion

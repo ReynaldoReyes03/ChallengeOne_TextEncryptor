@@ -1,9 +1,9 @@
 @use 'extendClass';
 
 .main {
-    width: 100%;
     @extend .flex__row--justify-space-between--align-stretch;
-    gap: 1rem;
+    width: 100%;
+    gap  : 1rem;
 
     @media (max-width: 1023px) {
         & {

@@ -1,14 +1,31 @@
 @use 'mixinsFunctions' as mixins;
+@use 'variables' as *;
+
+
+.decoration__background--1 {
+    background   : linear-gradient(135deg, $background-gradient-color-1, $background-gradient-color-2);
+}
+
+.decoration__background--2 {
+    background   : linear-gradient(315deg, $background-gradient-color-1, $background-gradient-color-2);
+}
+
+.decoration-base {
+    @extend .decoration__background--1;
+    content      : '';
+    position     : absolute;
+    border-radius: 50%;
+}
 
 .glass-border {
-    border           : 1px solid rgba(255, 255, 255, 0.25);
-    border-left-color: rgba(255, 255, 255, 0.75);
-    border-top-color : rgba(255, 255, 255, 0.75);
+    border           : 1px solid $glass-border-color-2;
+    border-left-color: $glass-border-color-1;
+    border-top-color : $glass-border-color-1;
 }
 
 .glass {
-    background       : linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.046));
-    backdrop-filter  : blur(1rem);
+    background       : linear-gradient(135deg, $glass-gradient-color-1, $glass-gradient-color-2);
+    backdrop-filter  : blur(0.7rem);
     @extend .glass-border;
 }
 
@@ -16,7 +33,7 @@
     /* Works on Firefox */
     & {
         scrollbar-width: thin;
-        scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.25);
+        scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
     }
 
     /* Works on Chrome, Edge, and Safari */
@@ -25,11 +42,11 @@
     }
 
     &::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.25);
+        background: $scrollbar-track-color;
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: $scrollbar-thumb-color;
         border-radius   : 5px;
     }
 }
@@ -41,17 +58,17 @@
     width           : 3rem;
     height          : 3rem;
     border-radius   : 50%;
-    border          : 1px solid rgba(255, 255, 255, 0.437);
+    border          : 1px solid $button-border-color;
     transition      : all 0.5s ease;
     transition-delay: 0.2s;
 
     &:hover {
-        background      : var(--color);
-        box-shadow      : 0 0 5px var(--color),
-                          0 0 15px var(--color),
-                          0 0 30px var(--color),
-                          0 0 60px var(--color);
-        border-color    : var(--color);
+        background      : $color;
+        box-shadow      : 0 0 5px $color,
+                          0 0 15px $color,
+                          0 0 30px $color,
+                          0 0 60px $color;
+        border-color    : $color;
         transform       : translateY(-0.8rem);
         transition-delay: 0.2s;
     }
@@ -59,13 +76,13 @@
 
 .button-text {
     @extend .glass;
-    color         : white;
+    color         : $text-color;
     position      : absolute;
     letter-spacing: 0.05rem;
     font-size     : 0.6rem;
     bottom        : 0;
     left          : 50%;
-    border-color  : var(--color);
+    border-color  : $color;
     padding       : 0.25rem 0.5rem;
     border-radius : 1rem;
     z-index       : 10;
@@ -78,7 +95,7 @@
         content   : '';
         position  : absolute;
         inset     : 0;
-        background: var(--color);
+        background: $color;
         opacity   : 0.3;
         z-index   : -1;
         width     : 100%;

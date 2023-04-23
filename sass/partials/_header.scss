@@ -1,18 +1,19 @@
 @use 'extendClass';
+@use 'variables' as *;
 
 .header {
+    @extend .glass;
     @extend .flex__row--justify-space-between;
     width        : 100%;
     padding      : 0.5rem 2rem;
     border-radius: 1rem;
-    @extend .glass;
 
     &__title {
-        color         : white;
+        color         : $text-color;
         font-size     : 2rem;
         text-transform: uppercase;
         letter-spacing: 0.8rem;
-        text-align: center;
+        text-align    : center;
 
         @media (max-width: 1023px) {
             & {
@@ -23,16 +24,16 @@
         @media (max-width: 767px) {
             & {
                 letter-spacing: 0.25rem;
-                order: 1;
-                width: 100%;
+                order         : 1;
+                width         : 100%;
             }
         }
     }
 
     &__logo-container {
-        font-size: 3rem;
+        font-size      : 3rem;
         text-decoration: none;
-        color: white;
+        color          : $text-color;
     }
 
     @media (max-width: 1023px) {

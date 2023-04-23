@@ -1,13 +1,14 @@
 @use 'extendClass';
+@use 'variables' as *;
 
 .container {
+    @extend .glass;
+    @extend .flex__row;
     width        : 50%;
     height       : auto;
     padding      : 2rem 0;
     border-radius: 1rem;
-    color        : white;
-    @extend .glass;
-    @extend .flex__row;
+    color        : $text-color;
 
     &__textarea {
         @extend .flex__row;
@@ -15,10 +16,10 @@
         position: relative;
     
         &-box {
+            @extend .flex__column;
             width     : 90%;
             min-height: 250px;
             position  : relative;
-            @extend .flex__column;
         }
     }
 
@@ -43,6 +44,9 @@
 
     &__text {
         width: 100%;
+        margin-top: 1rem;
+        text-align: justify;
+        line-height: 1.3rem;
     }
 
     &__image-box {
@@ -59,8 +63,4 @@
             width: 100%;
         }
     }
-}
-
-.help-container {
-    color: white;
 }

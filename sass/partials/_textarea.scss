@@ -1,42 +1,43 @@
 @use 'extendClass';
+@use 'variables' as *;
 
 .textarea {
     @extend .glass;
     @extend .custom-scrollbar;
-    border-radius : 0.5rem;
-    min-height    : 250px;
     width         : 100%;
+    min-height    : 250px;
     padding       : 1rem;
-    color         : white;
+    border-radius : 0.5rem;
+    color         : $text-color;
+    text-align    : justify;
     font-size     : 0.9rem;
     letter-spacing: 0.1rem;
     line-height   : 1.1rem;
-    outline       : none;
-    text-align    : justify;
     resize        : none;
-    overflow    : -moz-hidden-unscrollable;
+    outline       : none;
+    overflow      : -moz-hidden-unscrollable;
 
     &-box__label {
-        position   : absolute;
-        top        : 0;
-        left       : 0;
-        font-size  : 0.9rem;
+        position      : absolute;
+        top           : 0;
+        left          : 0;
+        font-size     : 0.9rem;
         letter-spacing: 0.1rem;
-        line-height: 1.2rem;
-        z-index: 8;
-        transform  : translate(1rem, 1rem);
-        transition: all 0.5s ease;
+        line-height   : 1.2rem;
+        z-index       : 8;
+        transform     : translate(1rem, 1rem);
+        transition    : all 0.5s ease;
 
         .textarea:focus ~ &,
         .textarea:not(:placeholder-shown) ~ & {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.859), rgba(255, 255, 255, 0.338));
             @extend .glass-border;
+            background   : linear-gradient(135deg, $label-background-color-1, $label-background-color-2);
             border-radius: 0.5rem;
-            padding: 0.1rem 0.4rem;
-            font-size: 0.7rem;
-            line-height: 1rem;
-            transform: translate(0.25rem, -0.6rem);
-            color: black;
+            padding      : 0.1rem 0.4rem;
+            font-size    : 0.7rem;
+            line-height  : 1rem;
+            transform    : translate(0.25rem, -0.6rem);
+            color        : $label-text-color;
         }
     }
 }

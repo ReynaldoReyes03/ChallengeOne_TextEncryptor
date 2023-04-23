@@ -1,5 +1,19 @@
-:root {
-    --light: red;
-}
-
-$rojo: var(--light);
+$color                      : var(--color);
+$background-gradient-color-1: var(--background-gradient-color-1);
+$background-gradient-color-2: var(--background-gradient-color-2);
+$button-border-color        : var(--button-border-color);
+$glass-gradient-color-1     : var(--glass-gradient-color-1);
+$glass-gradient-color-2     : var(--glass-gradient-color-2);
+$glass-border-color-1       : var(--glass-border-color-1);
+$glass-border-color-2       : var(--glass-border-color-2);
+$help-background-color-1    : var(--help-background-color-1);
+$help-background-color-2    : var(--help-background-color-2);
+$label-background-color-1   : var(--label-background-color-1);
+$label-background-color-2   : var(--label-background-color-2);
+$label-text-color           : var(--label-text-color);
+$scrollbar-track-color      : var(--scrollbar-track-color);
+$scrollbar-thumb-color      : var(--scrollbar-thumb-color);
+$svg-fill-color             : var(--svg-fill-color);
+$svg-stroke-color           : var(--svg-stroke-color);
+$text-color                 : var(--text-color);
+$transparent-color          : var(--transparent-color);

@@ -352,9 +352,13 @@
   padding: 0.5rem 1rem;
   width: 100%;
   border-radius: 2rem;
+  transition: all 0.5s ease;
 }
 .button__normal .button__icon {
   line-height: 1.5rem;
+}
+.button__normal:hover {
+  box-shadow: 0 0 5px var(--color), 0 0 15px var(--color), 0 0 30px var(--color), 0 0 60px var(--color);
 }
 
 .modal {
